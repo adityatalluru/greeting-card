@@ -21,29 +21,28 @@ body {
     width: 100vw;
 }
 
-/* ===== LEFT IMAGE PANEL ===== */
-.left-panel {
-    width: 30%;              /* 👈 reduced width */
+/* ===== SIDE PANELS ===== */
+.side-panel {
+    width: 25%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 18px;
+    gap: 20px;
     padding: 20px;
 }
 
-/* IMAGE STYLE */
-.left-panel img {
-    width: 180px;            /* 👈 CONTROL SIZE HERE */
-    max-width: 90%;
+/* IMAGE STYLE (CONTROL SIZE HERE) */
+.side-panel img {
+    width: 170px;
     height: auto;
     border-radius: 14px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.25);
 }
 
-/* ===== RIGHT CONTENT ===== */
-.right-content {
-    width: 70%;
+/* ===== CENTER PANEL ===== */
+.center-panel {
+    width: 50%;
     position: relative;
     display: flex;
     justify-content: center;
@@ -90,13 +89,12 @@ body {
     to   { transform: translateY(130vh) rotate(360deg); }
 }
 
-/* ===== CENTER ===== */
-.center {
+/* ===== HEART ===== */
+.heart-container {
     position: relative;
     z-index: 50;
 }
 
-/* ===== HEART ===== */
 .heart {
     position: relative;
     width: 260px;
@@ -147,23 +145,22 @@ body {
 }
 
 /* ===== MOBILE ===== */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .wrapper {
         flex-direction: column;
     }
 
-    .left-panel {
-        width: 100%;
+    .side-panel {
         flex-direction: row;
-        justify-content: center;
-    }
-
-    .right-content {
         width: 100%;
-        height: 65vh;
     }
 
-    .left-panel img {
+    .center-panel {
+        width: 100%;
+        height: 55vh;
+    }
+
+    .side-panel img {
         width: 140px;
     }
 
@@ -179,19 +176,19 @@ body {
 <div class="wrapper">
 
     <!-- LEFT IMAGES -->
-    <div class="left-panel">
-        <img src="images/IMG_4137.jpeg" alt="Memory Image 1">
-        <img src="images/IMG_4249.jpeg" alt="Memory Image 2">
+    <div class="side-panel">
+        <img src="images/IMG_4137.jpeg" alt="Left Image 1">
+        <img src="images/IMG_4249.jpeg" alt="Left Image 2">
     </div>
 
-    <!-- RIGHT CONTENT -->
-    <div class="right-content">
+    <!-- CENTER -->
+    <div class="center-panel">
 
         <!-- HEART SYMBOL LAYERS -->
         <div class="layer back">
-            <span style="left:20%; animation-duration:22s;">💞</span>
-            <span style="left:50%; animation-duration:24s;">💖</span>
-            <span style="left:80%; animation-duration:26s;">❤️</span>
+            <span style="left:20%; animation-duration:24s;">💞</span>
+            <span style="left:50%; animation-duration:26s;">💖</span>
+            <span style="left:80%; animation-duration:22s;">❤️</span>
         </div>
 
         <div class="layer mid">
@@ -212,7 +209,7 @@ body {
         </div>
 
         <!-- HEART -->
-        <div class="center">
+        <div class="heart-container">
             <div class="heart"></div>
             <div class="text">
                 Happy<br>
@@ -221,6 +218,13 @@ body {
         </div>
 
     </div>
+
+    <!-- RIGHT IMAGES -->
+    <div class="side-panel">
+        <img src="images/IMG_4138.jpeg" alt="Right Image 1">
+        <img src="images/IMG_4247.jpeg" alt="Right Image 2">
+    </div>
+
 </div>
 
 </body>
