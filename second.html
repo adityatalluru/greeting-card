@@ -10,14 +10,14 @@ body {
     margin: 0;
     height: 100vh;
     overflow: hidden;
-    background: #ffb6c1; /* baby pink */
+    background: #ffb6c1;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'Segoe UI', sans-serif;
 }
 
-/* ===== FLOATING HEART BACKGROUND (MULTI-LAYER) ===== */
+/* ===== HEART SYMBOL LAYERS ===== */
 .layer {
     position: absolute;
     inset: 0;
@@ -36,117 +36,108 @@ body {
 
 @keyframes floatUp {
     from { transform: translateY(0); }
-    to   { transform: translateY(-120vh); }
+    to   { transform: translateY(-130vh); }
 }
 
-/* ===== PETALS (SOFT, THIN) ===== */
+/* ===== PETALS (MULTI-LAYER, DENSE) ===== */
 .petals span {
     position: absolute;
-    top: -30px;
+    top: -40px;
     width: 12px;
-    height: 18px;
-    background: linear-gradient(135deg, #ff4d6d, #ff9aa2);
+    height: 20px;
+    background: linear-gradient(135deg, #ff2f5b, #ff9aa2);
     border-radius: 50% 50% 50% 0;
-    opacity: 0.55;
+    opacity: 0.6;
     animation: petalFall linear infinite;
 }
 
 @keyframes petalFall {
     from { transform: translateY(0) rotate(0deg); }
-    to   { transform: translateY(120vh) rotate(360deg); }
+    to   { transform: translateY(130vh) rotate(360deg); }
 }
 
 /* ===== CENTER ===== */
 .center {
     position: relative;
-    z-index: 20;
+    z-index: 50;
 }
 
-/* ===== PERFECT HEART ===== */
+/* ===== HEART ===== */
 .heart {
     position: relative;
-    width: 260px;
-    height: 260px;
+    width: 270px;
+    height: 270px;
     background: #ff0000;
     transform: rotate(-45deg);
     animation: heartbeat 1.4s infinite;
     box-shadow:
-        0 0 25px #ff1a1a,
-        0 0 50px #ff4d4d,
-        0 0 90px #ff8080;
+        0 0 30px #ff1a1a,
+        0 0 60px #ff4d4d,
+        0 0 110px #ff8080;
 }
 
 .heart::before,
 .heart::after {
     content: "";
     position: absolute;
-    width: 260px;
-    height: 260px;
+    width: 270px;
+    height: 270px;
     background: #ff0000;
     border-radius: 50%;
 }
 
-.heart::before {
-    top: -130px;
-    left: 0;
-}
-
-.heart::after {
-    left: 130px;
-    top: 0;
-}
+.heart::before { top: -135px; left: 0; }
+.heart::after  { left: 135px; top: 0; }
 
 @keyframes heartbeat {
     0%   { transform: rotate(-45deg) scale(1); }
-    50%  { transform: rotate(-45deg) scale(1.08); }
+    50%  { transform: rotate(-45deg) scale(1.1); }
     100% { transform: rotate(-45deg) scale(1); }
 }
 
-/* ===== TEXT (SOFT IVORY, NOT WHITE) ===== */
+/* ===== TEXT ===== */
 .text {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 30;
+    z-index: 60;
     text-align: center;
     font-size: 30px;
     font-weight: 800;
-    color: #fff5e6; /* soft ivory */
-    pointer-events: none;
+    color: #fff5e6;
     text-shadow:
         0 0 6px #ffe6eb,
         0 0 12px #ffd1dc,
-        0 0 24px #ffb6c1;
+        0 0 26px #ffb6c1;
 }
 
-/* subtle glitter */
 .text::after {
     content: "✨ ✨ ✨";
     display: block;
-    font-size: 16px;
+    font-size: 18px;
     margin-top: 6px;
     animation: glitter 1.5s infinite alternate;
 }
 
 @keyframes glitter {
     from { opacity: 0.4; }
-    to   { opacity: 0.9; }
+    to   { opacity: 1; }
 }
 
 /* ===== MOBILE ===== */
 @media (max-width: 480px) {
     .heart {
-        width: 210px;
-        height: 210px;
+        width: 220px;
+        height: 220px;
     }
     .heart::before,
     .heart::after {
-        width: 210px;
-        height: 210px;
+        width: 220px;
+        height: 220px;
     }
-    .heart::before { top: -105px; }
-    .heart::after  { left: 105px; }
+    .heart::before { top: -110px; }
+    .heart::after  { left: 110px; }
     .text { font-size: 24px; }
 }
 </style>
@@ -154,41 +145,65 @@ body {
 
 <body>
 
-<!-- HEART SYMBOL LAYERS -->
+<!-- HEART SYMBOL BACK LAYER -->
 <div class="layer back">
-    <span style="left:10%; animation-duration:22s;">💞</span>
-    <span style="left:30%; animation-duration:24s;">💗</span>
-    <span style="left:50%; animation-duration:26s;">💖</span>
-    <span style="left:70%; animation-duration:23s;">❤️</span>
-    <span style="left:90%; animation-duration:25s;">💝</span>
+    <span style="left:5%;  animation-duration:24s;">💞</span>
+    <span style="left:15%; animation-duration:26s;">💗</span>
+    <span style="left:25%; animation-duration:22s;">💖</span>
+    <span style="left:35%; animation-duration:28s;">❤️</span>
+    <span style="left:45%; animation-duration:24s;">💝</span>
+    <span style="left:55%; animation-duration:26s;">💞</span>
+    <span style="left:65%; animation-duration:22s;">💗</span>
+    <span style="left:75%; animation-duration:28s;">💖</span>
+    <span style="left:85%; animation-duration:24s;">❤️</span>
+    <span style="left:95%; animation-duration:26s;">💝</span>
 </div>
 
+<!-- MID LAYER -->
 <div class="layer mid">
-    <span style="left:15%; animation-duration:14s;">❤️</span>
-    <span style="left:35%; animation-duration:16s;">💖</span>
-    <span style="left:55%; animation-duration:15s;">💞</span>
-    <span style="left:75%; animation-duration:17s;">💗</span>
+    <span style="left:8%;  animation-duration:16s;">❤️</span>
+    <span style="left:18%; animation-duration:14s;">💖</span>
+    <span style="left:28%; animation-duration:18s;">💞</span>
+    <span style="left:38%; animation-duration:15s;">💗</span>
+    <span style="left:48%; animation-duration:17s;">💘</span>
+    <span style="left:58%; animation-duration:14s;">💖</span>
+    <span style="left:68%; animation-duration:18s;">❤️</span>
+    <span style="left:78%; animation-duration:15s;">💞</span>
+    <span style="left:88%; animation-duration:17s;">💗</span>
 </div>
 
+<!-- FRONT LAYER -->
 <div class="layer front">
-    <span style="left:20%; animation-duration:9s;">💖</span>
-    <span style="left:40%; animation-duration:8s;">❤️</span>
-    <span style="left:60%; animation-duration:9s;">💞</span>
-    <span style="left:80%; animation-duration:8s;">💘</span>
+    <span style="left:10%; animation-duration:8s;">💖</span>
+    <span style="left:20%; animation-duration:7s;">❤️</span>
+    <span style="left:30%; animation-duration:9s;">💞</span>
+    <span style="left:40%; animation-duration:8s;">💗</span>
+    <span style="left:50%; animation-duration:7s;">💘</span>
+    <span style="left:60%; animation-duration:9s;">❤️</span>
+    <span style="left:70%; animation-duration:8s;">💖</span>
+    <span style="left:80%; animation-duration:7s;">💞</span>
+    <span style="left:90%; animation-duration:9s;">💗</span>
 </div>
 
-<!-- PETALS -->
+<!-- PETALS (DENSE) -->
 <div class="petals">
-    <span style="left:5%;  animation-duration:12s;"></span>
-    <span style="left:15%; animation-duration:14s;"></span>
-    <span style="left:25%; animation-duration:13s;"></span>
-    <span style="left:35%; animation-duration:15s;"></span>
-    <span style="left:45%; animation-duration:14s;"></span>
-    <span style="left:55%; animation-duration:16s;"></span>
-    <span style="left:65%; animation-duration:13s;"></span>
-    <span style="left:75%; animation-duration:15s;"></span>
-    <span style="left:85%; animation-duration:14s;"></span>
-    <span style="left:95%; animation-duration:16s;"></span>
+    <span style="left:2%;  animation-duration:10s;"></span>
+    <span style="left:8%;  animation-duration:12s;"></span>
+    <span style="left:14%; animation-duration:11s;"></span>
+    <span style="left:20%; animation-duration:13s;"></span>
+    <span style="left:26%; animation-duration:10s;"></span>
+    <span style="left:32%; animation-duration:12s;"></span>
+    <span style="left:38%; animation-duration:11s;"></span>
+    <span style="left:44%; animation-duration:13s;"></span>
+    <span style="left:50%; animation-duration:10s;"></span>
+    <span style="left:56%; animation-duration:12s;"></span>
+    <span style="left:62%; animation-duration:11s;"></span>
+    <span style="left:68%; animation-duration:13s;"></span>
+    <span style="left:74%; animation-duration:10s;"></span>
+    <span style="left:80%; animation-duration:12s;"></span>
+    <span style="left:86%; animation-duration:11s;"></span>
+    <span style="left:92%; animation-duration:13s;"></span>
+    <span style="left:98%; animation-duration:10s;"></span>
 </div>
 
 <!-- CENTER HEART -->
