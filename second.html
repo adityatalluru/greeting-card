@@ -5,13 +5,21 @@
 <title>Happy Valentine’s Day 💖</title>
 
 <style>
-/* ===== BASE ===== */
+/* ===== BASE + GRADIENT BACKGROUND ===== */
 body {
     margin: 0;
     height: 100vh;
     overflow: hidden;
-    background: #ffb6c1;
     font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(270deg, #ffb6c1, #ffc1cc, #ffd1dc);
+    background-size: 600% 600%;
+    animation: bgShift 18s ease infinite;
+}
+
+@keyframes bgShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 /* ===== MAIN LAYOUT ===== */
@@ -25,18 +33,29 @@ body {
 .side-panel {
     width: 25%;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 20px;
-    padding: 20px;
 }
 
-.side-panel img {
+.carousel {
+    position: relative;
     width: 170px;
-    height: auto;
+    height: 230px;
+}
+
+.carousel img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     border-radius: 14px;
     box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+    opacity: 0;
+    transition: opacity 1.2s ease;
+}
+
+.carousel img.active {
+    opacity: 1;
 }
 
 /* ===== CENTER PANEL ===== */
@@ -48,16 +67,13 @@ body {
     align-items: center;
 }
 
-/* ===== FLOATING HEART EMOJIS (BIGGER + THICKER) ===== */
+/* ===== FLOATING HEARTS ===== */
 .floating-hearts span {
     position: absolute;
     bottom: -40px;
-    font-size: 36px; /* +20% size */
+    font-size: 36px;
     opacity: 0.85;
     animation: floatUp linear infinite;
-    text-shadow:
-        0 0 6px #ff4d6d,
-        0 0 12px #ff1a4d;
 }
 
 @keyframes floatUp {
@@ -65,7 +81,7 @@ body {
     to   { transform: translateY(-120vh); }
 }
 
-/* ===== ROSE PETALS ===== */
+/* ===== PETALS ===== */
 .petals span {
     position: absolute;
     top: -40px;
@@ -82,23 +98,23 @@ body {
     to   { transform: translateY(130vh) rotate(360deg); }
 }
 
-/* ===== HEART (REDUCED SIZE) ===== */
+/* ===== HEART ===== */
 .heart-container {
     position: relative;
     z-index: 50;
+    cursor: pointer;
 }
 
 .heart {
-    position: relative;
-    width: 220px;   /* reduced */
-    height: 220px;  /* reduced */
+    width: 220px;
+    height: 220px;
     background: red;
     transform: rotate(-45deg);
     animation: heartbeat 1.4s infinite;
     box-shadow:
         0 0 25px #ff1a1a,
-        0 0 45px #ff4d4d,
-        0 0 80px #ff8080;
+        0 0 50px #ff4d4d,
+        0 0 90px #ff8080;
 }
 
 .heart::before,
@@ -126,7 +142,6 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 60;
     text-align: center;
     font-size: 26px;
     font-weight: 800;
@@ -137,43 +152,21 @@ body {
         0 0 22px #ffb6c1;
 }
 
+/* ===== SECRET MESSAGE ===== */
+.secret {
+    margin-top: 14px;
+    text-align: center;
+    font-size: 18px;
+    color: #fff;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
 /* ===== MOBILE ===== */
 @media (max-width: 900px) {
-    .wrapper {
-        flex-direction: column;
-    }
-
-    .side-panel {
-        flex-direction: row;
-        width: 100%;
-    }
-
-    .center-panel {
-        width: 100%;
-        height: 55vh;
-    }
-
-    .side-panel img {
-        width: 140px;
-    }
-
-    .heart {
-        width: 180px;
-        height: 180px;
-    }
-
-    .heart::before,
-    .heart::after {
-        width: 180px;
-        height: 180px;
-    }
-
-    .heart::before { top: -90px; }
-    .heart::after  { left: 90px; }
-
-    .text {
-        font-size: 22px;
-    }
+    .wrapper { flex-direction: column; }
+    .side-panel { width: 100%; }
+    .center-panel { width: 100%; height: 55vh; }
 }
 </style>
 </head>
@@ -182,48 +175,81 @@ body {
 
 <div class="wrapper">
 
-    <!-- LEFT IMAGES -->
+    <!-- LEFT CAROUSEL -->
     <div class="side-panel">
-        <img src="images/IMG_4137.jpeg">
-        <img src="images/IMG_4249.jpeg">
+        <div class="carousel" id="leftCarousel">
+            <img src="images/IMG_4137.jpeg" class="active">
+            <img src="images/IMG_4249.jpeg">
+        </div>
     </div>
 
     <!-- CENTER -->
     <div class="center-panel">
 
-        <!-- FLOATING HEART EMOJIS -->
+        <!-- FLOATING HEARTS -->
         <div class="floating-hearts">
             <span style="left:20%; animation-duration:14s;">💞</span>
-            <span style="left:40%; animation-duration:16s;">❤️</span>
-            <span style="left:60%; animation-duration:15s;">💖</span>
-            <span style="left:80%; animation-duration:17s;">💗</span>
+            <span style="left:50%; animation-duration:16s;">❤️</span>
+            <span style="left:80%; animation-duration:15s;">💖</span>
         </div>
 
         <!-- PETALS -->
         <div class="petals">
             <span style="left:30%; animation-duration:11s;"></span>
-            <span style="left:55%; animation-duration:13s;"></span>
-            <span style="left:75%; animation-duration:12s;"></span>
+            <span style="left:60%; animation-duration:13s;"></span>
         </div>
 
         <!-- HEART -->
-        <div class="heart-container">
+        <div class="heart-container" id="heart">
             <div class="heart"></div>
-            <div class="text">
-                Happy<br>
-                Valentine’s Day 💕
+            <div class="text" id="message">
+                Happy<br>Valentine’s Day 💕
+            </div>
+            <div class="secret" id="secret">
+                You make every day brighter 🌸
             </div>
         </div>
 
     </div>
 
-    <!-- RIGHT IMAGES -->
+    <!-- RIGHT CAROUSEL -->
     <div class="side-panel">
-        <img src="images/IMG_4138.jpeg">
-        <img src="images/IMG_4247.jpeg">
+        <div class="carousel" id="rightCarousel">
+            <img src="images/IMG_4138.jpeg" class="active">
+            <img src="images/IMG_4247.jpeg">
+        </div>
     </div>
 
 </div>
+
+<script>
+/* ===== NAME PERSONALIZATION ===== */
+const params = new URLSearchParams(window.location.search);
+const name = params.get("name");
+if (name) {
+    document.getElementById("message").innerHTML =
+        `Happy Valentine’s Day<br>${name} 💕`;
+}
+
+/* ===== HEART CLICK EFFECT ===== */
+document.getElementById("heart").addEventListener("click", () => {
+    document.getElementById("secret").style.opacity = 1;
+});
+
+/* ===== IMAGE CAROUSEL ===== */
+function startCarousel(id) {
+    const images = document.querySelectorAll(`#${id} img`);
+    let index = 0;
+    setInterval(() => {
+        images[index].classList.remove("active");
+        index = (index + 1) % images.length;
+        images[index].classList.add("active");
+    }, 3500);
+}
+
+startCarousel("leftCarousel");
+startCarousel("rightCarousel");
+</script>
 
 </body>
 </html>
