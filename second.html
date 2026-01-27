@@ -5,7 +5,7 @@
 <title>Happy Valentine’s Day 💖</title>
 
 <style>
-/* ===== BASE + GRADIENT BACKGROUND ===== */
+/* ===== BASE + GRADIENT ===== */
 body {
     margin: 0;
     height: 100vh;
@@ -22,7 +22,7 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* ===== MAIN LAYOUT ===== */
+/* ===== LAYOUT ===== */
 .wrapper {
     display: flex;
     height: 100vh;
@@ -39,8 +39,8 @@ body {
 
 .carousel {
     position: relative;
-    width: 170px;
-    height: 230px;
+    width: 240px;   /* +40% IMAGE SIZE */
+    height: 320px;
 }
 
 .carousel img {
@@ -48,10 +48,10 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 14px;
-    box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+    border-radius: 18px;
+    box-shadow: 0 12px 26px rgba(0,0,0,0.28);
     opacity: 0;
-    transition: opacity 1.2s ease;
+    transition: opacity 1.4s ease;
 }
 
 .carousel img.active {
@@ -67,26 +67,43 @@ body {
     align-items: center;
 }
 
-/* ===== FLOATING HEARTS ===== */
-.floating-hearts span {
+/* ===== FLOATING HEART SYMBOLS (MULTI-LAYER) ===== */
+.floating span {
     position: absolute;
-    bottom: -40px;
-    font-size: 36px;
-    opacity: 0.85;
+    bottom: -50px;
     animation: floatUp linear infinite;
+}
+
+/* BACK LAYER */
+.floating.back span {
+    font-size: 26px;
+    opacity: 0.35;
+}
+
+/* MID LAYER */
+.floating.mid span {
+    font-size: 34px;
+    opacity: 0.6;
+}
+
+/* FRONT LAYER */
+.floating.front span {
+    font-size: 42px;
+    opacity: 0.9;
+    text-shadow: 0 0 12px #ff4d6d;
 }
 
 @keyframes floatUp {
     from { transform: translateY(0); }
-    to   { transform: translateY(-120vh); }
+    to   { transform: translateY(-130vh); }
 }
 
 /* ===== PETALS ===== */
 .petals span {
     position: absolute;
     top: -40px;
-    width: 14px;
-    height: 22px;
+    width: 16px;
+    height: 24px;
     background: linear-gradient(135deg, #ff2f5b, #ff9aa2);
     border-radius: 50% 50% 50% 0;
     opacity: 0.65;
@@ -112,9 +129,9 @@ body {
     transform: rotate(-45deg);
     animation: heartbeat 1.4s infinite;
     box-shadow:
-        0 0 25px #ff1a1a,
-        0 0 50px #ff4d4d,
-        0 0 90px #ff8080;
+        0 0 30px #ff1a1a,
+        0 0 60px #ff4d4d,
+        0 0 110px #ff8080;
 }
 
 .heart::before,
@@ -132,34 +149,36 @@ body {
 
 @keyframes heartbeat {
     0%   { transform: rotate(-45deg) scale(1); }
-    50%  { transform: rotate(-45deg) scale(1.08); }
+    50%  { transform: rotate(-45deg) scale(1.1); }
     100% { transform: rotate(-45deg) scale(1); }
 }
 
-/* ===== TEXT ===== */
+/* ===== TEXT (PERFECTLY CENTERED IN HEART) ===== */
 .text {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) rotate(45deg);
     text-align: center;
     font-size: 26px;
     font-weight: 800;
-    color: #fff5e6;
+    color: #fff;
     text-shadow:
-        0 0 6px #ffe6eb,
-        0 0 12px #ffd1dc,
-        0 0 22px #ffb6c1;
+        0 0 8px #ffe6eb,
+        0 0 16px #ffd1dc,
+        0 0 30px #ffb6c1;
+    width: 180px;
+    pointer-events: none;
 }
 
 /* ===== SECRET MESSAGE ===== */
 .secret {
-    margin-top: 14px;
+    margin-top: 16px;
     text-align: center;
     font-size: 18px;
     color: #fff;
     opacity: 0;
-    transition: opacity 1s ease;
+    transition: opacity 1.2s ease;
 }
 
 /* ===== MOBILE ===== */
@@ -167,6 +186,11 @@ body {
     .wrapper { flex-direction: column; }
     .side-panel { width: 100%; }
     .center-panel { width: 100%; height: 55vh; }
+
+    .carousel {
+        width: 180px;
+        height: 240px;
+    }
 }
 </style>
 </head>
@@ -187,16 +211,28 @@ body {
     <div class="center-panel">
 
         <!-- FLOATING HEARTS -->
-        <div class="floating-hearts">
-            <span style="left:20%; animation-duration:14s;">💞</span>
-            <span style="left:50%; animation-duration:16s;">❤️</span>
-            <span style="left:80%; animation-duration:15s;">💖</span>
+        <div class="floating back">
+            <span style="left:10%; animation-duration:28s;">💞</span>
+            <span style="left:40%; animation-duration:30s;">❤️</span>
+            <span style="left:70%; animation-duration:26s;">💖</span>
+        </div>
+
+        <div class="floating mid">
+            <span style="left:20%; animation-duration:18s;">💗</span>
+            <span style="left:50%; animation-duration:20s;">💘</span>
+            <span style="left:80%; animation-duration:16s;">💞</span>
+        </div>
+
+        <div class="floating front">
+            <span style="left:30%; animation-duration:12s;">❤️</span>
+            <span style="left:60%; animation-duration:14s;">💖</span>
         </div>
 
         <!-- PETALS -->
         <div class="petals">
-            <span style="left:30%; animation-duration:11s;"></span>
-            <span style="left:60%; animation-duration:13s;"></span>
+            <span style="left:25%; animation-duration:11s;"></span>
+            <span style="left:55%; animation-duration:13s;"></span>
+            <span style="left:75%; animation-duration:12s;"></span>
         </div>
 
         <!-- HEART -->
@@ -223,7 +259,7 @@ body {
 </div>
 
 <script>
-/* ===== NAME PERSONALIZATION ===== */
+/* NAME PERSONALIZATION */
 const params = new URLSearchParams(window.location.search);
 const name = params.get("name");
 if (name) {
@@ -231,19 +267,19 @@ if (name) {
         `Happy Valentine’s Day<br>${name} 💕`;
 }
 
-/* ===== HEART CLICK EFFECT ===== */
+/* HEART CLICK */
 document.getElementById("heart").addEventListener("click", () => {
     document.getElementById("secret").style.opacity = 1;
 });
 
-/* ===== IMAGE CAROUSEL ===== */
+/* CAROUSEL */
 function startCarousel(id) {
-    const images = document.querySelectorAll(`#${id} img`);
-    let index = 0;
+    const imgs = document.querySelectorAll(`#${id} img`);
+    let i = 0;
     setInterval(() => {
-        images[index].classList.remove("active");
-        index = (index + 1) % images.length;
-        images[index].classList.add("active");
+        imgs[i].classList.remove("active");
+        i = (i + 1) % imgs.length;
+        imgs[i].classList.add("active");
     }, 3500);
 }
 
