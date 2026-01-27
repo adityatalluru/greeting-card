@@ -5,7 +5,7 @@
 <title>Happy Valentine’s Day 💖</title>
 
 <style>
-/* ===== BASE + GRADIENT BACKGROUND ===== */
+/* ===== BASE ===== */
 body {
     margin: 0;
     height: 100vh;
@@ -39,7 +39,7 @@ body {
 
 .carousel {
     position: relative;
-    width: 240px;   /* ~40% larger */
+    width: 240px;
     height: 320px;
 }
 
@@ -67,23 +67,15 @@ body {
     align-items: center;
 }
 
-/* ===== FLOATING HEARTS (DENSE MULTI-LAYER) ===== */
+/* ===== FLOATING HEARTS ===== */
 .floating span {
     position: absolute;
     bottom: -50px;
     animation: floatUp linear infinite;
 }
 
-.floating.back span {
-    font-size: 24px;
-    opacity: 0.3;
-}
-
-.floating.mid span {
-    font-size: 34px;
-    opacity: 0.6;
-}
-
+.floating.back span  { font-size: 24px; opacity: 0.3; }
+.floating.mid span   { font-size: 34px; opacity: 0.6; }
 .floating.front span {
     font-size: 44px;
     opacity: 0.95;
@@ -95,7 +87,7 @@ body {
     to   { transform: translateY(-130vh); }
 }
 
-/* ===== ROSE PETALS ===== */
+/* ===== PETALS ===== */
 .petals span {
     position: absolute;
     top: -40px;
@@ -112,56 +104,58 @@ body {
     to   { transform: translateY(130vh) rotate(360deg); }
 }
 
-/* ===== HEART (OPTICALLY BALANCED) ===== */
-.heart-container {
+/* ===== HEART WRAPPER ===== */
+.heart-wrapper {
     position: relative;
-    z-index: 50;
-    cursor: pointer;
-}
-
-.heart {
     width: 210px;
     height: 210px;
-    background: red;
     transform: rotate(-45deg);
-    animation: heartbeat 1.4s infinite;
+}
+
+/* ===== HEART SHAPE ===== */
+.heart {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: red;
     box-shadow:
         0 0 28px #ff1a1a,
         0 0 55px #ff4d4d,
         0 0 100px #ff8080;
+    animation: heartbeat 1.4s infinite;
 }
 
 .heart::before,
 .heart::after {
     content: "";
     position: absolute;
-    width: 210px;
-    height: 210px;
+    width: 100%;
+    height: 100%;
     background: red;
     border-radius: 50%;
 }
 
-.heart::before { top: -105px; left: 0; }
-.heart::after  { left: 105px; top: 0; }
+.heart::before { top: -50%; left: 0; }
+.heart::after  { left: 50%; top: 0; }
 
 @keyframes heartbeat {
-    0%   { transform: rotate(-45deg) scale(1); }
-    50%  { transform: rotate(-45deg) scale(1.08); }
-    100% { transform: rotate(-45deg) scale(1); }
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.08); }
+    100% { transform: scale(1); }
 }
 
-/* ===== TEXT (PERFECTLY STRAIGHT & CENTERED) ===== */
-.text {
+/* ===== TEXT PERFECTLY CENTERED ===== */
+.heart-text {
     position: absolute;
     inset: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    transform: rotate(45deg);
+    transform: rotate(45deg); /* counter rotation */
     text-align: center;
     font-size: 26px;
     font-weight: 800;
-    color: #ffffff;
+    color: #fff;
     text-shadow:
         0 0 8px #ffe6eb,
         0 0 16px #ffd1dc,
@@ -184,11 +178,7 @@ body {
     .wrapper { flex-direction: column; }
     .side-panel { width: 100%; }
     .center-panel { width: 100%; height: 55vh; }
-
-    .carousel {
-        width: 180px;
-        height: 240px;
-    }
+    .carousel { width: 180px; height: 240px; }
 }
 </style>
 </head>
@@ -197,7 +187,7 @@ body {
 
 <div class="wrapper">
 
-    <!-- LEFT IMAGES -->
+    <!-- LEFT -->
     <div class="side-panel">
         <div class="carousel" id="leftCarousel">
             <img src="images/IMG_4137.jpeg" class="active">
@@ -210,43 +200,44 @@ body {
 
         <!-- FLOATING HEARTS -->
         <div class="floating back">
-            <span style="left:10%; animation-duration:30s;">💞</span>
-            <span style="left:40%; animation-duration:28s;">❤️</span>
-            <span style="left:70%; animation-duration:32s;">💖</span>
+            <span style="left:15%; animation-duration:30s;">💞</span>
+            <span style="left:45%; animation-duration:28s;">❤️</span>
+            <span style="left:75%; animation-duration:32s;">💖</span>
         </div>
 
         <div class="floating mid">
-            <span style="left:20%; animation-duration:20s;">💗</span>
-            <span style="left:50%; animation-duration:18s;">💘</span>
-            <span style="left:80%; animation-duration:22s;">💞</span>
+            <span style="left:25%; animation-duration:20s;">💗</span>
+            <span style="left:55%; animation-duration:18s;">💘</span>
+            <span style="left:85%; animation-duration:22s;">💞</span>
         </div>
 
         <div class="floating front">
-            <span style="left:30%; animation-duration:14s;">❤️</span>
-            <span style="left:60%; animation-duration:16s;">💖</span>
+            <span style="left:35%; animation-duration:14s;">❤️</span>
+            <span style="left:65%; animation-duration:16s;">💖</span>
         </div>
 
         <!-- PETALS -->
         <div class="petals">
-            <span style="left:25%; animation-duration:11s;"></span>
-            <span style="left:55%; animation-duration:13s;"></span>
-            <span style="left:75%; animation-duration:12s;"></span>
+            <span style="left:30%; animation-duration:11s;"></span>
+            <span style="left:60%; animation-duration:13s;"></span>
+            <span style="left:80%; animation-duration:12s;"></span>
         </div>
 
         <!-- HEART -->
-        <div class="heart-container" id="heart">
+        <div class="heart-wrapper" id="heart">
             <div class="heart"></div>
-            <div class="text" id="message">
+            <div class="heart-text" id="message">
                 Happy<br>Valentine’s Day 💕
             </div>
-            <div class="secret" id="secret">
-                You make every day brighter 🌸
-            </div>
+        </div>
+
+        <div class="secret" id="secret">
+            You make every day brighter 🌸
         </div>
 
     </div>
 
-    <!-- RIGHT IMAGES -->
+    <!-- RIGHT -->
     <div class="side-panel">
         <div class="carousel" id="rightCarousel">
             <img src="images/IMG_4138.jpeg" class="active">
@@ -265,12 +256,12 @@ if (name) {
         `Happy Valentine’s Day<br>${name} 💕`;
 }
 
-/* HEART CLICK */
+/* SECRET MESSAGE */
 document.getElementById("heart").addEventListener("click", () => {
     document.getElementById("secret").style.opacity = 1;
 });
 
-/* IMAGE CAROUSEL */
+/* CAROUSEL */
 function startCarousel(id) {
     const imgs = document.querySelectorAll(`#${id} img`);
     let i = 0;
@@ -280,7 +271,6 @@ function startCarousel(id) {
         imgs[i].classList.add("active");
     }, 3500);
 }
-
 startCarousel("leftCarousel");
 startCarousel("rightCarousel");
 </script>
