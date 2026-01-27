@@ -1,11 +1,4 @@
-.heart {
-    width: 260px;
-    height: 230px;
-    background: red;
-    position: relative;
-    transform: rotate(-45deg);
-    animation: heartbeat 1.5s infinite;
-}<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -27,8 +20,7 @@ body {
 /* ===== FLOATING HEARTS BACKGROUND ===== */
 .hearts {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     overflow: hidden;
     z-index: 1;
 }
@@ -36,61 +28,53 @@ body {
 .hearts span {
     position: absolute;
     bottom: -50px;
-    color: #ff2f68;
-    font-size: 24px;
+    font-size: 26px;
     animation: floatUp linear infinite;
     opacity: 0.8;
 }
 
 @keyframes floatUp {
-    from {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    to {
-        transform: translateY(-110vh);
-        opacity: 0;
-    }
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-110vh); opacity: 0; }
 }
 
-/* ===== CENTER HEART ===== */
+/* ===== HEART CONTAINER ===== */
 .heart-container {
     position: relative;
-    z-index: 2;
+    z-index: 5;
 }
 
-.text {
-    position: absolute;
-    z-index: 10; /* 🔥 THIS FIXES THE ISSUE */
-    text-align: center;
-    color: white;
-    font-size: 28px;
-    font-weight: bold;
-    transform: rotate(45deg);
-    text-shadow:
-        0 0 5px #ffffff,
-        0 0 10px #ffffff,
-        0 0 20px #ffb6c1,
-        0 0 30px #ff69b4;
+/* ===== HEART SHAPE ===== */
+.heart {
+    width: 280px;
+    height: 260px;
+    background: #ff0000;
+    position: relative;
+    transform: rotate(-45deg);
+    animation: heartbeat 1.4s infinite;
+    box-shadow:
+        0 0 25px #ff1a1a,
+        0 0 50px #ff4d4d,
+        0 0 90px #ff8080;
 }
 
 .heart::before,
 .heart::after {
     content: "";
-    width: 260px;
-    height: 230px;
-    background: red;
+    width: 280px;
+    height: 260px;
+    background: #ff0000;
     border-radius: 50%;
     position: absolute;
 }
 
 .heart::before {
-    top: -130px;
+    top: -140px;
     left: 0;
 }
 
 .heart::after {
-    left: 130px;
+    left: 140px;
     top: 0;
 }
 
@@ -106,29 +90,64 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) rotate(45deg);
+    z-index: 10;
     text-align: center;
+    font-size: 30px;
+    font-weight: 800;
     color: white;
-    font-size: 26px;
-    font-weight: bold;
+    letter-spacing: 1px;
     text-shadow:
-        0 0 5px #fff,
-        0 0 10px #ffd1dc,
-        0 0 20px #ff69b4;
+        0 0 5px #ffffff,
+        0 0 10px #ffffff,
+        0 0 20px #ffd1dc,
+        0 0 35px #ff69b4;
+}
+
+/* ===== GLITTER PARTICLES ===== */
+.glitter {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 11;
+}
+
+.glitter span {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+    animation: sparkle 2s infinite ease-in-out;
+    opacity: 0;
+}
+
+@keyframes sparkle {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(0); opacity: 0; }
 }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 480px) {
     .heart {
-        width: 200px;
-        height: 180px;
+        width: 220px;
+        height: 200px;
     }
+    .heart::before,
+    .heart::after {
+        width: 220px;
+        height: 200px;
+    }
+    .heart::before { top: -110px; }
+    .heart::after { left: 110px; }
+    .text { font-size: 24px; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- FLOATING HEARTS -->
+<!-- BACKGROUND FLOATING HEARTS -->
 <div class="hearts">
     <span style="left:5%; animation-duration:10s;">💞</span>
     <span style="left:15%; animation-duration:12s;">❤️</span>
@@ -139,7 +158,6 @@ body {
     <span style="left:65%; animation-duration:9s;">💞</span>
     <span style="left:75%; animation-duration:12s;">❤️</span>
     <span style="left:85%; animation-duration:10s;">💖</span>
-    <span style="left:95%; animation-duration:11s;">💗</span>
 </div>
 
 <!-- CENTER HEART -->
@@ -148,9 +166,17 @@ body {
         <div class="text">
             Happy<br>Valentine’s Day 💕
         </div>
+
+        <!-- GLITTER -->
+        <div class="glitter">
+            <span style="top:30%; left:35%; animation-delay:0s;"></span>
+            <span style="top:40%; left:55%; animation-delay:.4s;"></span>
+            <span style="top:55%; left:45%; animation-delay:.8s;"></span>
+            <span style="top:65%; left:60%; animation-delay:1.2s;"></span>
+            <span style="top:35%; left:60%; animation-delay:1.6s;"></span>
+        </div>
     </div>
 </div>
 
 </body>
 </html>
-
