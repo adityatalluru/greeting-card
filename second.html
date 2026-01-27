@@ -30,16 +30,16 @@ body {
     animation: floatUp linear infinite;
 }
 
-.layer.back span { font-size: 18px; opacity: 0.35; }
-.layer.mid  span { font-size: 24px; opacity: 0.6; }
-.layer.front span{ font-size: 30px; opacity: 0.9; }
+.layer.back span  { font-size: 18px; opacity: 0.35; }
+.layer.mid span   { font-size: 24px; opacity: 0.6; }
+.layer.front span { font-size: 30px; opacity: 0.9; }
 
 @keyframes floatUp {
     from { transform: translateY(0); }
     to   { transform: translateY(-120vh); }
 }
 
-/* ===== PETALS (CSS SHAPES – NOT ROSES) ===== */
+/* ===== PETALS (SOFT, THIN) ===== */
 .petals span {
     position: absolute;
     top: -30px;
@@ -47,20 +47,16 @@ body {
     height: 18px;
     background: linear-gradient(135deg, #ff4d6d, #ff9aa2);
     border-radius: 50% 50% 50% 0;
-    opacity: 0.6;
+    opacity: 0.55;
     animation: petalFall linear infinite;
 }
 
 @keyframes petalFall {
-    from {
-        transform: translateY(0) rotate(0deg);
-    }
-    to {
-        transform: translateY(120vh) rotate(360deg);
-    }
+    from { transform: translateY(0) rotate(0deg); }
+    to   { transform: translateY(120vh) rotate(360deg); }
 }
 
-/* ===== CENTER CONTENT ===== */
+/* ===== CENTER ===== */
 .center {
     position: relative;
     z-index: 20;
@@ -75,9 +71,9 @@ body {
     transform: rotate(-45deg);
     animation: heartbeat 1.4s infinite;
     box-shadow:
-        0 0 30px #ff1a1a,
-        0 0 60px #ff4d4d,
-        0 0 100px #ff8080;
+        0 0 25px #ff1a1a,
+        0 0 50px #ff4d4d,
+        0 0 90px #ff8080;
 }
 
 .heart::before,
@@ -106,7 +102,7 @@ body {
     100% { transform: rotate(-45deg) scale(1); }
 }
 
-/* ===== TEXT (TRUE CENTER) ===== */
+/* ===== TEXT (SOFT IVORY, NOT WHITE) ===== */
 .text {
     position: absolute;
     top: 50%;
@@ -116,28 +112,26 @@ body {
     text-align: center;
     font-size: 30px;
     font-weight: 800;
-    color: white;
+    color: #fff5e6; /* soft ivory */
     pointer-events: none;
     text-shadow:
-        0 0 5px #ffffff,
-        0 0 10px #ffffff,
-        0 0 20px #ffd1dc,
-        0 0 35px #ff69b4,
-        0 0 50px #ff69b4;
+        0 0 6px #ffe6eb,
+        0 0 12px #ffd1dc,
+        0 0 24px #ffb6c1;
 }
 
-/* Glitter pulse */
+/* subtle glitter */
 .text::after {
     content: "✨ ✨ ✨";
     display: block;
-    font-size: 18px;
+    font-size: 16px;
     margin-top: 6px;
     animation: glitter 1.5s infinite alternate;
 }
 
 @keyframes glitter {
     from { opacity: 0.4; }
-    to   { opacity: 1; }
+    to   { opacity: 0.9; }
 }
 
 /* ===== MOBILE ===== */
@@ -160,13 +154,13 @@ body {
 
 <body>
 
-<!-- HEART BACKGROUND -->
+<!-- HEART SYMBOL LAYERS -->
 <div class="layer back">
-    <span style="left:10%; animation-duration:20s;">💞</span>
-    <span style="left:30%; animation-duration:22s;">💗</span>
-    <span style="left:50%; animation-duration:24s;">💖</span>
-    <span style="left:70%; animation-duration:21s;">❤️</span>
-    <span style="left:90%; animation-duration:23s;">💝</span>
+    <span style="left:10%; animation-duration:22s;">💞</span>
+    <span style="left:30%; animation-duration:24s;">💗</span>
+    <span style="left:50%; animation-duration:26s;">💖</span>
+    <span style="left:70%; animation-duration:23s;">❤️</span>
+    <span style="left:90%; animation-duration:25s;">💝</span>
 </div>
 
 <div class="layer mid">
@@ -185,7 +179,7 @@ body {
 
 <!-- PETALS -->
 <div class="petals">
-    <span style="left:5%; animation-duration:12s;"></span>
+    <span style="left:5%;  animation-duration:12s;"></span>
     <span style="left:15%; animation-duration:14s;"></span>
     <span style="left:25%; animation-duration:13s;"></span>
     <span style="left:35%; animation-duration:15s;"></span>
