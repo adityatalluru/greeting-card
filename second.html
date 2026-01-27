@@ -16,28 +16,34 @@ body {
 
 /* ===== MAIN LAYOUT ===== */
 .wrapper {
-    position: relative;
     display: flex;
     height: 100vh;
     width: 100vw;
 }
 
-/* ===== LEFT IMAGE SECTION ===== */
-.left-image {
-    width: 40%;
-    height: 100%;
-    overflow: hidden;
+/* ===== LEFT IMAGE PANEL ===== */
+.left-panel {
+    width: 30%;              /* 👈 reduced width */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    padding: 20px;
 }
 
-.left-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* fits image nicely */
+/* IMAGE STYLE */
+.left-panel img {
+    width: 180px;            /* 👈 CONTROL SIZE HERE */
+    max-width: 90%;
+    height: auto;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
 }
 
-/* ===== RIGHT CONTENT SECTION ===== */
+/* ===== RIGHT CONTENT ===== */
 .right-content {
-    width: 60%;
+    width: 70%;
     position: relative;
     display: flex;
     justify-content: center;
@@ -84,7 +90,7 @@ body {
     to   { transform: translateY(130vh) rotate(360deg); }
 }
 
-/* ===== CENTER CONTENT ===== */
+/* ===== CENTER ===== */
 .center {
     position: relative;
     z-index: 50;
@@ -140,33 +146,25 @@ body {
         0 0 26px #ffb6c1;
 }
 
-.text::after {
-    content: "✨ ✨ ✨";
-    display: block;
-    font-size: 18px;
-    margin-top: 6px;
-    animation: glitter 1.5s infinite alternate;
-}
-
-@keyframes glitter {
-    from { opacity: 0.4; }
-    to   { opacity: 1; }
-}
-
 /* ===== MOBILE ===== */
 @media (max-width: 768px) {
     .wrapper {
         flex-direction: column;
     }
 
-    .left-image {
+    .left-panel {
         width: 100%;
-        height: 40vh;
+        flex-direction: row;
+        justify-content: center;
     }
 
     .right-content {
         width: 100%;
-        height: 60vh;
+        height: 65vh;
+    }
+
+    .left-panel img {
+        width: 140px;
     }
 
     .text {
@@ -180,47 +178,40 @@ body {
 
 <div class="wrapper">
 
-    <!-- LEFT IMAGE -->
-    <div class="left-image">
-        <img src="images/IMG_4137.jpeg" alt="Valentine Image">
+    <!-- LEFT IMAGES -->
+    <div class="left-panel">
+        <img src="images/IMG_4137.jpeg" alt="Memory Image 1">
+        <img src="images/IMG_4249.jpeg" alt="Memory Image 2">
     </div>
 
     <!-- RIGHT CONTENT -->
     <div class="right-content">
 
-        <!-- HEART SYMBOL BACKGROUND -->
+        <!-- HEART SYMBOL LAYERS -->
         <div class="layer back">
-            <span style="left:10%; animation-duration:22s;">💞</span>
-            <span style="left:30%; animation-duration:24s;">💗</span>
-            <span style="left:50%; animation-duration:26s;">💖</span>
-            <span style="left:70%; animation-duration:23s;">❤️</span>
-            <span style="left:90%; animation-duration:25s;">💝</span>
+            <span style="left:20%; animation-duration:22s;">💞</span>
+            <span style="left:50%; animation-duration:24s;">💖</span>
+            <span style="left:80%; animation-duration:26s;">❤️</span>
         </div>
 
         <div class="layer mid">
-            <span style="left:15%; animation-duration:14s;">❤️</span>
-            <span style="left:35%; animation-duration:16s;">💖</span>
-            <span style="left:55%; animation-duration:15s;">💞</span>
-            <span style="left:75%; animation-duration:17s;">💗</span>
+            <span style="left:30%; animation-duration:16s;">💗</span>
+            <span style="left:60%; animation-duration:14s;">💘</span>
         </div>
 
         <div class="layer front">
-            <span style="left:20%; animation-duration:8s;">💖</span>
-            <span style="left:40%; animation-duration:7s;">❤️</span>
-            <span style="left:60%; animation-duration:9s;">💞</span>
-            <span style="left:80%; animation-duration:8s;">💗</span>
+            <span style="left:40%; animation-duration:8s;">💖</span>
+            <span style="left:70%; animation-duration:7s;">❤️</span>
         </div>
 
         <!-- PETALS -->
         <div class="petals">
-            <span style="left:5%; animation-duration:10s;"></span>
-            <span style="left:25%; animation-duration:12s;"></span>
-            <span style="left:45%; animation-duration:11s;"></span>
-            <span style="left:65%; animation-duration:13s;"></span>
-            <span style="left:85%; animation-duration:10s;"></span>
+            <span style="left:25%; animation-duration:10s;"></span>
+            <span style="left:55%; animation-duration:12s;"></span>
+            <span style="left:75%; animation-duration:11s;"></span>
         </div>
 
-        <!-- HEART + TEXT -->
+        <!-- HEART -->
         <div class="center">
             <div class="heart"></div>
             <div class="text">
