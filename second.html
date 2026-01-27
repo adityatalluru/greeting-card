@@ -5,178 +5,116 @@
 <title>Happy Valentine’s Day 💖</title>
 
 <style>
-/* ===== BODY ===== */
 body {
     margin: 0;
     height: 100vh;
+    background: #ffb6c1;
     overflow: hidden;
-    background: #ffb6c1; /* baby pink */
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'Segoe UI', sans-serif;
 }
 
-/* ===== FLOATING HEARTS BACKGROUND ===== */
-.hearts {
+/* Falling glitter */
+.glitter span {
     position: absolute;
-    inset: 0;
-    overflow: hidden;
-    z-index: 1;
+    top: -10px;
+    font-size: 18px;
+    animation: fall linear infinite;
 }
 
-.hearts span {
-    position: absolute;
-    bottom: -50px;
-    font-size: 26px;
-    animation: floatUp linear infinite;
-    opacity: 0.8;
+@keyframes fall {
+    to { transform: translateY(110vh); opacity: 0; }
 }
 
-@keyframes floatUp {
-    from { transform: translateY(0); opacity: 1; }
-    to { transform: translateY(-110vh); opacity: 0; }
-}
-
-/* ===== HEART CONTAINER ===== */
-.heart-container {
-    position: relative;
-    z-index: 5;
-}
-
-/* ===== HEART SHAPE ===== */
+/* Heart */
 .heart {
-    width: 280px;
-    height: 260px;
-    background: #ff0000;
+    width: 260px;
+    height: 240px;
+    background: red;
     position: relative;
     transform: rotate(-45deg);
-    animation: heartbeat 1.4s infinite;
+    cursor: pointer;
     box-shadow:
-        0 0 25px #ff1a1a,
-        0 0 50px #ff4d4d,
-        0 0 90px #ff8080;
+        0 0 30px #ff1a1a,
+        0 0 60px #ff4d4d,
+        0 0 100px #ff8080;
+    animation: pulse 1.5s infinite;
 }
 
 .heart::before,
 .heart::after {
     content: "";
-    width: 280px;
-    height: 260px;
-    background: #ff0000;
+    width: 260px;
+    height: 240px;
+    background: red;
     border-radius: 50%;
     position: absolute;
 }
 
 .heart::before {
-    top: -140px;
+    top: -130px;
     left: 0;
 }
 
 .heart::after {
-    left: 140px;
+    left: 130px;
     top: 0;
 }
 
-@keyframes heartbeat {
-    0% { transform: rotate(-45deg) scale(1); }
-    50% { transform: rotate(-45deg) scale(1.08); }
-    100% { transform: rotate(-45deg) scale(1); }
+@keyframes pulse {
+    50% { transform: rotate(-45deg) scale(1.1); }
 }
 
-/* ===== TEXT INSIDE HEART ===== */
+/* Text */
 .text {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) rotate(45deg);
-    z-index: 10;
-    text-align: center;
-    font-size: 30px;
-    font-weight: 800;
     color: white;
-    letter-spacing: 1px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
     text-shadow:
-        0 0 5px #ffffff,
-        0 0 10px #ffffff,
-        0 0 20px #ffd1dc,
-        0 0 35px #ff69b4;
-}
-
-/* ===== GLITTER PARTICLES ===== */
-.glitter {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 11;
-}
-
-.glitter span {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background: white;
-    border-radius: 50%;
-    animation: sparkle 2s infinite ease-in-out;
-    opacity: 0;
-}
-
-@keyframes sparkle {
-    0% { transform: scale(0); opacity: 0; }
-    50% { transform: scale(1.2); opacity: 1; }
-    100% { transform: scale(0); opacity: 0; }
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 480px) {
-    .heart {
-        width: 220px;
-        height: 200px;
-    }
-    .heart::before,
-    .heart::after {
-        width: 220px;
-        height: 200px;
-    }
-    .heart::before { top: -110px; }
-    .heart::after { left: 110px; }
-    .text { font-size: 24px; }
+        0 0 5px white,
+        0 0 15px #ffd1dc,
+        0 0 30px #ff69b4;
 }
 </style>
 </head>
 
 <body>
 
-<!-- BACKGROUND FLOATING HEARTS -->
-<div class="hearts">
-    <span style="left:5%; animation-duration:10s;">💞</span>
-    <span style="left:15%; animation-duration:12s;">❤️</span>
-    <span style="left:25%; animation-duration:9s;">💖</span>
-    <span style="left:35%; animation-duration:11s;">💗</span>
-    <span style="left:45%; animation-duration:10s;">💘</span>
-    <span style="left:55%; animation-duration:13s;">💝</span>
-    <span style="left:65%; animation-duration:9s;">💞</span>
-    <span style="left:75%; animation-duration:12s;">❤️</span>
-    <span style="left:85%; animation-duration:10s;">💖</span>
+<!-- Falling glitter -->
+<div class="glitter">
+    <span style="left:10%; animation-duration:6s;">✨</span>
+    <span style="left:30%; animation-duration:8s;">💖</span>
+    <span style="left:50%; animation-duration:7s;">✨</span>
+    <span style="left:70%; animation-duration:9s;">💞</span>
+    <span style="left:90%; animation-duration:6s;">✨</span>
 </div>
 
-<!-- CENTER HEART -->
-<div class="heart-container">
-    <div class="heart">
-        <div class="text">
-            Happy<br>Valentine’s Day 💕
-        </div>
-
-        <!-- GLITTER -->
-        <div class="glitter">
-            <span style="top:30%; left:35%; animation-delay:0s;"></span>
-            <span style="top:40%; left:55%; animation-delay:.4s;"></span>
-            <span style="top:55%; left:45%; animation-delay:.8s;"></span>
-            <span style="top:65%; left:60%; animation-delay:1.2s;"></span>
-            <span style="top:35%; left:60%; animation-delay:1.6s;"></span>
-        </div>
+<div class="heart" onclick="heartClick()">
+    <div class="text" id="message">
+        Happy<br>Valentine’s Day 💕
     </div>
 </div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const name = params.get("name");
+if (name) {
+    document.getElementById("message").innerHTML =
+        `Happy Valentine’s Day<br>${name} 💖`;
+}
+
+function heartClick() {
+    document.getElementById("message").innerHTML =
+        "You are deeply special 💖";
+}
+</script>
 
 </body>
 </html>
