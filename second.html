@@ -5,7 +5,7 @@
 <title>Happy Valentine’s Day 💖</title>
 
 <style>
-/* ===== BASE + GRADIENT ===== */
+/* ===== BASE + GRADIENT BACKGROUND ===== */
 body {
     margin: 0;
     height: 100vh;
@@ -13,7 +13,7 @@ body {
     font-family: 'Segoe UI', sans-serif;
     background: linear-gradient(270deg, #ffb6c1, #ffc1cc, #ffd1dc);
     background-size: 600% 600%;
-    animation: bgShift 18s ease infinite;
+    animation: bgShift 20s ease infinite;
 }
 
 @keyframes bgShift {
@@ -39,7 +39,7 @@ body {
 
 .carousel {
     position: relative;
-    width: 240px;   /* +40% IMAGE SIZE */
+    width: 240px;   /* ~40% larger */
     height: 320px;
 }
 
@@ -67,30 +67,27 @@ body {
     align-items: center;
 }
 
-/* ===== FLOATING HEART SYMBOLS (MULTI-LAYER) ===== */
+/* ===== FLOATING HEARTS (DENSE MULTI-LAYER) ===== */
 .floating span {
     position: absolute;
     bottom: -50px;
     animation: floatUp linear infinite;
 }
 
-/* BACK LAYER */
 .floating.back span {
-    font-size: 26px;
-    opacity: 0.35;
+    font-size: 24px;
+    opacity: 0.3;
 }
 
-/* MID LAYER */
 .floating.mid span {
     font-size: 34px;
     opacity: 0.6;
 }
 
-/* FRONT LAYER */
 .floating.front span {
-    font-size: 42px;
-    opacity: 0.9;
-    text-shadow: 0 0 12px #ff4d6d;
+    font-size: 44px;
+    opacity: 0.95;
+    text-shadow: 0 0 14px #ff4d6d;
 }
 
 @keyframes floatUp {
@@ -98,7 +95,7 @@ body {
     to   { transform: translateY(-130vh); }
 }
 
-/* ===== PETALS ===== */
+/* ===== ROSE PETALS ===== */
 .petals span {
     position: absolute;
     top: -40px;
@@ -115,7 +112,7 @@ body {
     to   { transform: translateY(130vh) rotate(360deg); }
 }
 
-/* ===== HEART ===== */
+/* ===== HEART (OPTICALLY BALANCED) ===== */
 .heart-container {
     position: relative;
     z-index: 50;
@@ -123,57 +120,58 @@ body {
 }
 
 .heart {
-    width: 220px;
-    height: 220px;
+    width: 210px;
+    height: 210px;
     background: red;
     transform: rotate(-45deg);
     animation: heartbeat 1.4s infinite;
     box-shadow:
-        0 0 30px #ff1a1a,
-        0 0 60px #ff4d4d,
-        0 0 110px #ff8080;
+        0 0 28px #ff1a1a,
+        0 0 55px #ff4d4d,
+        0 0 100px #ff8080;
 }
 
 .heart::before,
 .heart::after {
     content: "";
     position: absolute;
-    width: 220px;
-    height: 220px;
+    width: 210px;
+    height: 210px;
     background: red;
     border-radius: 50%;
 }
 
-.heart::before { top: -110px; left: 0; }
-.heart::after  { left: 110px; top: 0; }
+.heart::before { top: -105px; left: 0; }
+.heart::after  { left: 105px; top: 0; }
 
 @keyframes heartbeat {
     0%   { transform: rotate(-45deg) scale(1); }
-    50%  { transform: rotate(-45deg) scale(1.1); }
+    50%  { transform: rotate(-45deg) scale(1.08); }
     100% { transform: rotate(-45deg) scale(1); }
 }
 
-/* ===== TEXT (PERFECTLY CENTERED IN HEART) ===== */
+/* ===== TEXT (PERFECTLY STRAIGHT & CENTERED) ===== */
 .text {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(45deg);
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotate(45deg);
     text-align: center;
     font-size: 26px;
     font-weight: 800;
-    color: #fff;
+    color: #ffffff;
     text-shadow:
         0 0 8px #ffe6eb,
         0 0 16px #ffd1dc,
         0 0 30px #ffb6c1;
-    width: 180px;
     pointer-events: none;
 }
 
 /* ===== SECRET MESSAGE ===== */
 .secret {
-    margin-top: 16px;
+    margin-top: 18px;
     text-align: center;
     font-size: 18px;
     color: #fff;
@@ -199,7 +197,7 @@ body {
 
 <div class="wrapper">
 
-    <!-- LEFT CAROUSEL -->
+    <!-- LEFT IMAGES -->
     <div class="side-panel">
         <div class="carousel" id="leftCarousel">
             <img src="images/IMG_4137.jpeg" class="active">
@@ -212,20 +210,20 @@ body {
 
         <!-- FLOATING HEARTS -->
         <div class="floating back">
-            <span style="left:10%; animation-duration:28s;">💞</span>
-            <span style="left:40%; animation-duration:30s;">❤️</span>
-            <span style="left:70%; animation-duration:26s;">💖</span>
+            <span style="left:10%; animation-duration:30s;">💞</span>
+            <span style="left:40%; animation-duration:28s;">❤️</span>
+            <span style="left:70%; animation-duration:32s;">💖</span>
         </div>
 
         <div class="floating mid">
-            <span style="left:20%; animation-duration:18s;">💗</span>
-            <span style="left:50%; animation-duration:20s;">💘</span>
-            <span style="left:80%; animation-duration:16s;">💞</span>
+            <span style="left:20%; animation-duration:20s;">💗</span>
+            <span style="left:50%; animation-duration:18s;">💘</span>
+            <span style="left:80%; animation-duration:22s;">💞</span>
         </div>
 
         <div class="floating front">
-            <span style="left:30%; animation-duration:12s;">❤️</span>
-            <span style="left:60%; animation-duration:14s;">💖</span>
+            <span style="left:30%; animation-duration:14s;">❤️</span>
+            <span style="left:60%; animation-duration:16s;">💖</span>
         </div>
 
         <!-- PETALS -->
@@ -248,7 +246,7 @@ body {
 
     </div>
 
-    <!-- RIGHT CAROUSEL -->
+    <!-- RIGHT IMAGES -->
     <div class="side-panel">
         <div class="carousel" id="rightCarousel">
             <img src="images/IMG_4138.jpeg" class="active">
@@ -272,7 +270,7 @@ document.getElementById("heart").addEventListener("click", () => {
     document.getElementById("secret").style.opacity = 1;
 });
 
-/* CAROUSEL */
+/* IMAGE CAROUSEL */
 function startCarousel(id) {
     const imgs = document.querySelectorAll(`#${id} img`);
     let i = 0;
