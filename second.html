@@ -5,67 +5,71 @@
 <title>Happy Valentine’s Day 💖</title>
 
 <style>
-/* ===== BODY ===== */
+/* ===== BASE ===== */
 body {
     margin: 0;
     height: 100vh;
     overflow: hidden;
-    background: #ffb6c1;
+    background: #ffb6c1; /* baby pink */
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'Segoe UI', sans-serif;
 }
 
-/* ===== MULTI-LAYER HEART BACKGROUND ===== */
-.love-layer {
+/* ===== FLOATING HEART LAYERS ===== */
+.layer {
     position: absolute;
     inset: 0;
     overflow: hidden;
 }
 
-.layer-back { z-index: 1; }
-.layer-mid  { z-index: 2; }
-.layer-front{ z-index: 3; }
-
-.love-layer span {
+.layer span {
     position: absolute;
     bottom: -40px;
     animation: floatUp linear infinite;
 }
 
-.layer-back span {
-    font-size: 18px;
-    opacity: 0.35;
-}
-
-.layer-mid span {
-    font-size: 24px;
-    opacity: 0.6;
-}
-
-.layer-front span {
-    font-size: 30px;
-    opacity: 0.9;
-}
+.layer.back span { font-size: 18px; opacity: 0.35; }
+.layer.mid span  { font-size: 24px; opacity: 0.6; }
+.layer.front span{ font-size: 30px; opacity: 0.9; }
 
 @keyframes floatUp {
     from { transform: translateY(0); }
     to   { transform: translateY(-120vh); }
 }
 
+/* ===== ROSE PETALS ===== */
+.petals span {
+    position: absolute;
+    top: -30px;
+    font-size: 14px;
+    color: #e60026;
+    opacity: 0.5;
+    animation: petalFall linear infinite;
+}
+
+@keyframes petalFall {
+    from {
+        transform: translateY(0) rotate(0deg);
+    }
+    to {
+        transform: translateY(120vh) rotate(360deg);
+    }
+}
+
 /* ===== CENTER CONTENT ===== */
 .center {
     position: relative;
-    z-index: 10;
+    z-index: 20;
 }
 
-/* ===== HEART ===== */
+/* ===== PERFECT HEART ===== */
 .heart {
     position: relative;
-    width: 270px;
-    height: 250px;
-    background: red;
+    width: 260px;
+    height: 260px;
+    background: #ff0000;
     transform: rotate(-45deg);
     animation: heartbeat 1.4s infinite;
     box-shadow:
@@ -78,19 +82,19 @@ body {
 .heart::after {
     content: "";
     position: absolute;
-    width: 270px;
-    height: 250px;
-    background: red;
+    width: 260px;
+    height: 260px;
+    background: #ff0000;
     border-radius: 50%;
 }
 
 .heart::before {
-    top: -125px;
+    top: -130px;
     left: 0;
 }
 
 .heart::after {
-    left: 125px;
+    left: 130px;
     top: 0;
 }
 
@@ -100,13 +104,13 @@ body {
     100% { transform: rotate(-45deg) scale(1); }
 }
 
-/* ===== TEXT ===== */
+/* ===== TEXT (TRUE CENTER) ===== */
 .text {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 20;
+    z-index: 30;
     text-align: center;
     font-size: 30px;
     font-weight: 800;
@@ -138,15 +142,15 @@ body {
 @media (max-width: 480px) {
     .heart {
         width: 210px;
-        height: 190px;
+        height: 210px;
     }
     .heart::before,
     .heart::after {
         width: 210px;
-        height: 190px;
+        height: 210px;
     }
-    .heart::before { top: -95px; }
-    .heart::after { left: 95px; }
+    .heart::before { top: -105px; }
+    .heart::after  { left: 105px; }
     .text { font-size: 24px; }
 }
 </style>
@@ -154,34 +158,38 @@ body {
 
 <body>
 
-<!-- BACK LAYER (slow, small, faint) -->
-<div class="love-layer layer-back">
-    <span style="left:5%; animation-duration:18s;">💞</span>
-    <span style="left:20%; animation-duration:22s;">💗</span>
-    <span style="left:35%; animation-duration:20s;">💖</span>
-    <span style="left:50%; animation-duration:24s;">❤️</span>
-    <span style="left:65%; animation-duration:21s;">💝</span>
-    <span style="left:80%; animation-duration:23s;">💞</span>
+<!-- HEART BACKGROUND LAYERS -->
+<div class="layer back">
+    <span style="left:10%; animation-duration:20s;">💞</span>
+    <span style="left:30%; animation-duration:22s;">💗</span>
+    <span style="left:50%; animation-duration:24s;">💖</span>
+    <span style="left:70%; animation-duration:21s;">❤️</span>
+    <span style="left:90%; animation-duration:23s;">💝</span>
 </div>
 
-<!-- MID LAYER -->
-<div class="love-layer layer-mid">
-    <span style="left:10%; animation-duration:12s;">💖</span>
-    <span style="left:25%; animation-duration:14s;">❤️</span>
-    <span style="left:40%; animation-duration:13s;">💗</span>
-    <span style="left:55%; animation-duration:15s;">💘</span>
-    <span style="left:70%; animation-duration:14s;">💞</span>
-    <span style="left:85%; animation-duration:13s;">💝</span>
+<div class="layer mid">
+    <span style="left:15%; animation-duration:14s;">❤️</span>
+    <span style="left:35%; animation-duration:16s;">💖</span>
+    <span style="left:55%; animation-duration:15s;">💞</span>
+    <span style="left:75%; animation-duration:17s;">💗</span>
 </div>
 
-<!-- FRONT LAYER (fast, big, bright) -->
-<div class="love-layer layer-front">
-    <span style="left:15%; animation-duration:8s;">❤️</span>
-    <span style="left:30%; animation-duration:9s;">💖</span>
-    <span style="left:45%; animation-duration:7s;">💞</span>
-    <span style="left:60%; animation-duration:9s;">💗</span>
-    <span style="left:75%; animation-duration:8s;">💘</span>
-    <span style="left:90%; animation-duration:7s;">❤️</span>
+<div class="layer front">
+    <span style="left:20%; animation-duration:9s;">💖</span>
+    <span style="left:40%; animation-duration:8s;">❤️</span>
+    <span style="left:60%; animation-duration:9s;">💞</span>
+    <span style="left:80%; animation-duration:8s;">💘</span>
+</div>
+
+<!-- ROSE PETALS -->
+<div class="petals">
+    <span style="left:5%; animation-duration:12s;">🌹</span>
+    <span style="left:20%; animation-duration:14s;">🌹</span>
+    <span style="left:35%; animation-duration:13s;">🌹</span>
+    <span style="left:50%; animation-duration:15s;">🌹</span>
+    <span style="left:65%; animation-duration:14s;">🌹</span>
+    <span style="left:80%; animation-duration:16s;">🌹</span>
+    <span style="left:95%; animation-duration:13s;">🌹</span>
 </div>
 
 <!-- CENTER HEART -->
