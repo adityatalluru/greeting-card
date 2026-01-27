@@ -39,7 +39,7 @@ body {
     to   { transform: translateY(-130vh); }
 }
 
-/* ===== PETALS (MULTI-LAYER, DENSE) ===== */
+/* ===== PETALS ===== */
 .petals span {
     position: absolute;
     top: -40px;
@@ -60,6 +60,16 @@ body {
 .center {
     position: relative;
     z-index: 50;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ===== IMAGE ===== */
+.center-img {
+    width: 120px;
+    margin-bottom: 18px;
+    z-index: 55;
 }
 
 /* ===== HEART ===== */
@@ -127,6 +137,9 @@ body {
 
 /* ===== MOBILE ===== */
 @media (max-width: 480px) {
+    .center-img {
+        width: 90px;
+    }
     .heart {
         width: 220px;
         height: 220px;
@@ -185,29 +198,21 @@ body {
     <span style="left:90%; animation-duration:9s;">💗</span>
 </div>
 
-<!-- PETALS (DENSE) -->
+<!-- PETALS -->
 <div class="petals">
-    <span style="left:2%;  animation-duration:10s;"></span>
-    <span style="left:8%;  animation-duration:12s;"></span>
-    <span style="left:14%; animation-duration:11s;"></span>
-    <span style="left:20%; animation-duration:13s;"></span>
-    <span style="left:26%; animation-duration:10s;"></span>
-    <span style="left:32%; animation-duration:12s;"></span>
-    <span style="left:38%; animation-duration:11s;"></span>
-    <span style="left:44%; animation-duration:13s;"></span>
-    <span style="left:50%; animation-duration:10s;"></span>
-    <span style="left:56%; animation-duration:12s;"></span>
-    <span style="left:62%; animation-duration:11s;"></span>
-    <span style="left:68%; animation-duration:13s;"></span>
-    <span style="left:74%; animation-duration:10s;"></span>
-    <span style="left:80%; animation-duration:12s;"></span>
-    <span style="left:86%; animation-duration:11s;"></span>
-    <span style="left:92%; animation-duration:13s;"></span>
-    <span style="left:98%; animation-duration:10s;"></span>
+    <span style="left:2%;"></span><span style="left:8%;"></span><span style="left:14%;"></span>
+    <span style="left:20%;"></span><span style="left:26%;"></span><span style="left:32%;"></span>
+    <span style="left:38%;"></span><span style="left:44%;"></span><span style="left:50%;"></span>
+    <span style="left:56%;"></span><span style="left:62%;"></span><span style="left:68%;"></span>
+    <span style="left:74%;"></span><span style="left:80%;"></span><span style="left:86%;"></span>
+    <span style="left:92%;"></span><span style="left:98%;"></span>
 </div>
 
-<!-- CENTER HEART -->
+<!-- CENTER CONTENT -->
 <div class="center">
+    <!-- CHANGE IMAGE NAME HERE -->
+    <img src="images/love.png" class="center-img" alt="Love Image">
+
     <div class="heart"></div>
     <div class="text">
         Happy<br>
