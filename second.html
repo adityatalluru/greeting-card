@@ -11,17 +11,45 @@ body {
     height: 100vh;
     overflow: hidden;
     background: #ffb6c1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-family: 'Segoe UI', sans-serif;
 }
 
-/* ===== HEART SYMBOL LAYERS ===== */
+/* ===== MAIN LAYOUT ===== */
+.wrapper {
+    position: relative;
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* ===== LEFT IMAGE SECTION ===== */
+.left-image {
+    width: 40%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.left-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* fits image nicely */
+}
+
+/* ===== RIGHT CONTENT SECTION ===== */
+.right-content {
+    width: 60%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ===== HEART SYMBOL BACKGROUND ===== */
 .layer {
     position: absolute;
     inset: 0;
     overflow: hidden;
+    pointer-events: none;
 }
 
 .layer span {
@@ -56,27 +84,17 @@ body {
     to   { transform: translateY(130vh) rotate(360deg); }
 }
 
-/* ===== CENTER ===== */
+/* ===== CENTER CONTENT ===== */
 .center {
     position: relative;
     z-index: 50;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* ===== IMAGE ===== */
-.center-img {
-    width: 120px;
-    margin-bottom: 18px;
-    z-index: 55;
 }
 
 /* ===== HEART ===== */
 .heart {
     position: relative;
-    width: 270px;
-    height: 270px;
+    width: 260px;
+    height: 260px;
     background: #ff0000;
     transform: rotate(-45deg);
     animation: heartbeat 1.4s infinite;
@@ -90,14 +108,14 @@ body {
 .heart::after {
     content: "";
     position: absolute;
-    width: 270px;
-    height: 270px;
+    width: 260px;
+    height: 260px;
     background: #ff0000;
     border-radius: 50%;
 }
 
-.heart::before { top: -135px; left: 0; }
-.heart::after  { left: 135px; top: 0; }
+.heart::before { top: -130px; left: 0; }
+.heart::after  { left: 130px; top: 0; }
 
 @keyframes heartbeat {
     0%   { transform: rotate(-45deg) scale(1); }
@@ -136,87 +154,81 @@ body {
 }
 
 /* ===== MOBILE ===== */
-@media (max-width: 480px) {
-    .center-img {
-        width: 90px;
+@media (max-width: 768px) {
+    .wrapper {
+        flex-direction: column;
     }
-    .heart {
-        width: 220px;
-        height: 220px;
+
+    .left-image {
+        width: 100%;
+        height: 40vh;
     }
-    .heart::before,
-    .heart::after {
-        width: 220px;
-        height: 220px;
+
+    .right-content {
+        width: 100%;
+        height: 60vh;
     }
-    .heart::before { top: -110px; }
-    .heart::after  { left: 110px; }
-    .text { font-size: 24px; }
+
+    .text {
+        font-size: 24px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEART SYMBOL BACK LAYER -->
-<div class="layer back">
-    <span style="left:5%;  animation-duration:24s;">💞</span>
-    <span style="left:15%; animation-duration:26s;">💗</span>
-    <span style="left:25%; animation-duration:22s;">💖</span>
-    <span style="left:35%; animation-duration:28s;">❤️</span>
-    <span style="left:45%; animation-duration:24s;">💝</span>
-    <span style="left:55%; animation-duration:26s;">💞</span>
-    <span style="left:65%; animation-duration:22s;">💗</span>
-    <span style="left:75%; animation-duration:28s;">💖</span>
-    <span style="left:85%; animation-duration:24s;">❤️</span>
-    <span style="left:95%; animation-duration:26s;">💝</span>
-</div>
+<div class="wrapper">
 
-<!-- MID LAYER -->
-<div class="layer mid">
-    <span style="left:8%;  animation-duration:16s;">❤️</span>
-    <span style="left:18%; animation-duration:14s;">💖</span>
-    <span style="left:28%; animation-duration:18s;">💞</span>
-    <span style="left:38%; animation-duration:15s;">💗</span>
-    <span style="left:48%; animation-duration:17s;">💘</span>
-    <span style="left:58%; animation-duration:14s;">💖</span>
-    <span style="left:68%; animation-duration:18s;">❤️</span>
-    <span style="left:78%; animation-duration:15s;">💞</span>
-    <span style="left:88%; animation-duration:17s;">💗</span>
-</div>
+    <!-- LEFT IMAGE -->
+    <div class="left-image">
+        <img src="images/IMG_4137.jpeg" alt="Valentine Image">
+    </div>
 
-<!-- FRONT LAYER -->
-<div class="layer front">
-    <span style="left:10%; animation-duration:8s;">💖</span>
-    <span style="left:20%; animation-duration:7s;">❤️</span>
-    <span style="left:30%; animation-duration:9s;">💞</span>
-    <span style="left:40%; animation-duration:8s;">💗</span>
-    <span style="left:50%; animation-duration:7s;">💘</span>
-    <span style="left:60%; animation-duration:9s;">❤️</span>
-    <span style="left:70%; animation-duration:8s;">💖</span>
-    <span style="left:80%; animation-duration:7s;">💞</span>
-    <span style="left:90%; animation-duration:9s;">💗</span>
-</div>
+    <!-- RIGHT CONTENT -->
+    <div class="right-content">
 
-<!-- PETALS -->
-<div class="petals">
-    <span style="left:2%;"></span><span style="left:8%;"></span><span style="left:14%;"></span>
-    <span style="left:20%;"></span><span style="left:26%;"></span><span style="left:32%;"></span>
-    <span style="left:38%;"></span><span style="left:44%;"></span><span style="left:50%;"></span>
-    <span style="left:56%;"></span><span style="left:62%;"></span><span style="left:68%;"></span>
-    <span style="left:74%;"></span><span style="left:80%;"></span><span style="left:86%;"></span>
-    <span style="left:92%;"></span><span style="left:98%;"></span>
-</div>
+        <!-- HEART SYMBOL BACKGROUND -->
+        <div class="layer back">
+            <span style="left:10%; animation-duration:22s;">💞</span>
+            <span style="left:30%; animation-duration:24s;">💗</span>
+            <span style="left:50%; animation-duration:26s;">💖</span>
+            <span style="left:70%; animation-duration:23s;">❤️</span>
+            <span style="left:90%; animation-duration:25s;">💝</span>
+        </div>
 
-<!-- CENTER CONTENT -->
-<div class="center">
-    <!-- CHANGE IMAGE NAME HERE -->
-    <img src="images/love.png" class="center-img" alt="Love Image">
+        <div class="layer mid">
+            <span style="left:15%; animation-duration:14s;">❤️</span>
+            <span style="left:35%; animation-duration:16s;">💖</span>
+            <span style="left:55%; animation-duration:15s;">💞</span>
+            <span style="left:75%; animation-duration:17s;">💗</span>
+        </div>
 
-    <div class="heart"></div>
-    <div class="text">
-        Happy<br>
-        Valentine’s Day 💕
+        <div class="layer front">
+            <span style="left:20%; animation-duration:8s;">💖</span>
+            <span style="left:40%; animation-duration:7s;">❤️</span>
+            <span style="left:60%; animation-duration:9s;">💞</span>
+            <span style="left:80%; animation-duration:8s;">💗</span>
+        </div>
+
+        <!-- PETALS -->
+        <div class="petals">
+            <span style="left:5%; animation-duration:10s;"></span>
+            <span style="left:25%; animation-duration:12s;"></span>
+            <span style="left:45%; animation-duration:11s;"></span>
+            <span style="left:65%; animation-duration:13s;"></span>
+            <span style="left:85%; animation-duration:10s;"></span>
+        </div>
+
+        <!-- HEART + TEXT -->
+        <div class="center">
+            <div class="heart"></div>
+            <div class="text">
+                Happy<br>
+                Valentine’s Day 💕
+            </div>
+        </div>
+
     </div>
 </div>
 
