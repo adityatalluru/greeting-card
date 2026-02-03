@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Wait… 😅</title>
+
+<style>
+/* ---------- RESET ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ---------- BODY ---------- */
+body {
+    height: 100vh;
+    background: black;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ---------- CONTENT ---------- */
+.container {
+    text-align: center;
+    color: #ffc1d9;
+}
+
+.title {
+    font-size: 38px;
+    color: #ff4d6d;
+    margin-bottom: 10px;
+    text-shadow: 0 0 20px #ff4d6d;
+}
+
+.subtitle {
+    font-size: 20px;
+    margin-bottom: 40px;
+}
+
+/* ---------- BUTTONS ---------- */
+.buttons {
+    position: relative;
+    width: 320px;
+    height: 150px;
+    margin: auto;
+}
+
+.yes-btn, .no-btn {
+    padding: 12px 35px;
+    font-size: 18px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+}
+
+.yes-btn {
+    background: #ff4d6d;
+    color: white;
+    left: 0;
+}
+
+.no-btn {
+    background: white;
+    color: #ff4d6d;
+    border: 2px solid #ff4d6d;
+    right: 0;
+    transition: transform 0.2s ease;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="title">Are you really saying NO? 😢</div>
+    <div class="subtitle">Try catching the button 😜</div>
+
+    <div class="buttons">
+        <button class="yes-btn" onclick="goYes()">Yes 💖</button>
+        <button class="no-btn" id="noBtn">No 🙈</button>
+    </div>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+
+const messages = [
+    "Are you sure? 😳",
+    "Think again 🙈",
+    "Don’t break my heart 💔",
+    "Last chance 😅",
+    "Okay… you win 😜"
+];
+
+let tries = 0;
+
+function moveButton() {
+    if (tries < messages.length) {
+        noBtn.textContent = messages[tries];
+    }
+
+    const x = Math.random() * 220 - 110;
+    const y = Math.random() * 120 - 60;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+
+    tries++;
+
+    if (tries === 5) {
+        setTimeout(() => {
+            window.location.href = "yes.html";
+        }, 900);
+    }
+}
+
+// Desktop hover
+noBtn.addEventListener("mouseenter", moveButton);
+
+// Mobile tap
+noBtn.addEventListener("touchstart", moveButton);
+
+function goYes() {
+    window.location.href = "yes.html";
+}
+</script>
+
+</body>
+</html>
