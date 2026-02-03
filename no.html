@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Wait… 😅</title>
+<title>Nice Try 😜</title>
 
 <style>
 /* ---------- RESET ---------- */
@@ -17,10 +17,10 @@ body {
     height: 100vh;
     background: black;
     overflow: hidden;
-    font-family: 'Segoe UI', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'Segoe UI', sans-serif;
 }
 
 /* ---------- CONTENT ---------- */
@@ -32,8 +32,8 @@ body {
 .title {
     font-size: 38px;
     color: #ff4d6d;
+    text-shadow: 0 0 25px #ff4d6d;
     margin-bottom: 10px;
-    text-shadow: 0 0 20px #ff4d6d;
 }
 
 .subtitle {
@@ -41,35 +41,39 @@ body {
     margin-bottom: 40px;
 }
 
-/* ---------- BUTTONS ---------- */
+/* ---------- BUTTON AREA ---------- */
 .buttons {
     position: relative;
-    width: 320px;
-    height: 150px;
+    width: 360px;
+    height: 200px;
     margin: auto;
 }
 
-.yes-btn, .no-btn {
+/* ---------- BUTTONS ---------- */
+button {
     padding: 12px 35px;
     font-size: 18px;
     border-radius: 30px;
     border: none;
     cursor: pointer;
-    position: absolute;
 }
 
 .yes-btn {
     background: #ff4d6d;
     color: white;
-    left: 0;
+    position: absolute;
+    left: 20px;
+    top: 80px;
 }
 
 .no-btn {
     background: white;
     color: #ff4d6d;
     border: 2px solid #ff4d6d;
-    right: 0;
-    transition: transform 0.2s ease;
+    position: absolute;
+    left: 220px;
+    top: 80px;
+    transition: left 0.15s ease, top 0.15s ease;
 }
 </style>
 </head>
@@ -78,9 +82,9 @@ body {
 
 <div class="container">
     <div class="title">Are you really saying NO? 😢</div>
-    <div class="subtitle">Try catching the button 😜</div>
+    <div class="subtitle">Try to click it 😏</div>
 
-    <div class="buttons">
+    <div class="buttons" id="box">
         <button class="yes-btn" onclick="goYes()">Yes 💖</button>
         <button class="no-btn" id="noBtn">No 🙈</button>
     </div>
@@ -88,6 +92,7 @@ body {
 
 <script>
 const noBtn = document.getElementById("noBtn");
+const box = document.getElementById("box");
 
 const messages = [
     "Are you sure? 😳",
@@ -104,9 +109,17 @@ function moveButton() {
         noBtn.textContent = messages[tries];
     }
 
-    const x = Math.random() * 220 - 110;
-    const y = Math.random() * 120 - 60;
-    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    const boxRect = box.getBoundingClientRect();
+    const btnRect = noBtn.getBoundingClientRect();
+
+    const maxX = boxRect.width - btnRect.width;
+    const maxY = boxRect.height - btnRect.height;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
 
     tries++;
 
@@ -117,10 +130,10 @@ function moveButton() {
     }
 }
 
-// Desktop hover
-noBtn.addEventListener("mouseenter", moveButton);
+/* Desktop */
+noBtn.addEventListener("mouseover", moveButton);
 
-// Mobile tap
+/* Mobile */
 noBtn.addEventListener("touchstart", moveButton);
 
 function goYes() {
