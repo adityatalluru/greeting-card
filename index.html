@@ -15,11 +15,18 @@
 body {
     height: 100vh;
     overflow: hidden;
-    background-color: #f7c1d9; /* baby pink */
+    background: linear-gradient(120deg, #f7c1d9 0%, #ffe1f0 40%, #ffd6e8 100%);
+    background-size: 300% 300%;
     font-family: 'Segoe UI', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@keyframes bgShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 /* ---------- FLOATING HEARTS ---------- */
@@ -71,6 +78,10 @@ body {
     font-size: 42px;
 }
 
+.container { animation: fadeIn 800ms ease; }
+
+@keyframes fadeIn { from { transform: translateY(10px); opacity: 0 } to { transform: translateY(0); opacity: 1 } }
+
 /* ---------- BUTTONS ---------- */
 .buttons {
     margin: 20px 0 35px;
@@ -112,6 +123,49 @@ body {
     color: #ff4f9a;
     margin-top: 15px;
 }
+/* Surprise overlay */
+#surpriseOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 300ms ease, visibility 300ms ease;
+}
+
+#surpriseOverlay.show { visibility: visible; opacity: 1; }
+
+#surpriseCard {
+    position: relative;
+    width: min(640px, 90%);
+    height: min(420px, 70%);
+    background: linear-gradient(180deg,#fff0f4, #fff);
+    border-radius: 18px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+    overflow: hidden;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+#proceedBtn {
+    margin-top: 18px;
+    padding: 10px 20px;
+    border-radius: 24px;
+    border: none;
+    background: #ff4d6d;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+canvas.confetti { position:absolute; inset:0; width:100%; height:100%; pointer-events:none }
 </style>
 </head>
 
@@ -119,6 +173,18 @@ body {
 
 <!-- Floating hearts -->
 <div class="hearts" id="hearts"></div>
+
+<!-- Surprise overlay (hidden until Yes clicked) -->
+<div id="surpriseOverlay">
+    <div id="surpriseCard">
+        <canvas class="confetti" id="confettiCanvas"></canvas>
+        <div style="z-index:2; text-align:center;">
+            <h2 style="color:#c2185b; margin-bottom:6px">Surprise! 💖</h2>
+            <p style="color:#ff4f9a;">I'm so happy you said yes — let's celebrate!</p>
+            <button id="proceedBtn">Open your surprise</button>
+        </div>
+    </div>
+</div>
 
 <!-- Main Content -->
 <div class="container">
@@ -156,16 +222,115 @@ function createHeart() {
     }, 7000);
 }
 
-setInterval(createHeart, 300);
+setInterval(createHeart, 220);
+
+// animate background
+document.body.style.animation = 'bgShift 10s ease infinite';
+
+/* ---------- SURPRISE / CONFETTI ---------- */
+const surpriseOverlay = document.getElementById('surpriseOverlay');
+const confettiCanvas = document.getElementById('confettiCanvas');
+const proceedBtn = document.getElementById('proceedBtn');
+let confettiCtx, confettiParticles = [], confettiAnim;
+
+function setupConfetti() {
+    confettiCanvas.width = confettiCanvas.clientWidth;
+    confettiCanvas.height = confettiCanvas.clientHeight;
+    confettiCtx = confettiCanvas.getContext('2d');
+}
+
+function spawnConfetti(count=120) {
+    confettiParticles = [];
+    for (let i=0;i<count;i++) {
+        confettiParticles.push({
+            x: Math.random()*confettiCanvas.width,
+            y: Math.random()*confettiCanvas.height/2,
+            r: 4 + Math.random()*8,
+            dx: -3 + Math.random()*6,
+            dy: 2 + Math.random()*6,
+            color: `hsl(${Math.random()*360},80%,60%)`,
+            rot: Math.random()*360,
+            dr: -6 + Math.random()*12
+        });
+    }
+}
+
+function renderConfetti() {
+    confettiCtx.clearRect(0,0,confettiCanvas.width, confettiCanvas.height);
+    for (let p of confettiParticles) {
+        confettiCtx.save();
+        confettiCtx.translate(p.x, p.y);
+        confettiCtx.rotate(p.rot*Math.PI/180);
+        confettiCtx.fillStyle = p.color;
+        confettiCtx.fillRect(-p.r/2, -p.r/2, p.r, p.r*0.6);
+        confettiCtx.restore();
+
+        p.x += p.dx; p.y += p.dy; p.rot += p.dr;
+        p.dy += 0.12; // gravity
+    }
+    confettiParticles = confettiParticles.filter(p => p.y < confettiCanvas.height+50);
+    if (confettiParticles.length) confettiAnim = requestAnimationFrame(renderConfetti);
+}
+
+function fireConfetti(duration=3200) {
+    setupConfetti();
+    spawnConfetti(180);
+    renderConfetti();
+    setTimeout(()=>{ cancelAnimationFrame(confettiAnim); confettiParticles = []; confettiCtx && confettiCtx.clearRect(0,0,confettiCanvas.width, confettiCanvas.height); }, duration);
+}
+
+// small celebratory melody using WebAudio
+function playMelody() {
+    try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const notes = [523.25, 659.25, 783.99, 1046.5];
+        let t = ctx.currentTime;
+        for (let i=0;i<8;i++) {
+            const o = ctx.createOscillator();
+            const g = ctx.createGain();
+            o.type = 'sine'; o.frequency.value = notes[i%notes.length];
+            g.gain.value = 0.06;
+            o.connect(g); g.connect(ctx.destination);
+            o.start(t);
+            o.stop(t+0.18);
+            t += 0.18;
+        }
+    } catch(e) { /* audio may be blocked until user gesture */ }
+}
 
 /* ---------- BUTTON ACTIONS ---------- */
 function goYes() {
-    window.location.href = "yes.html";
+    // show overlay, fire confetti, play music, then let user proceed
+    surpriseOverlay.classList.add('show');
+    fireConfetti(3800);
+    playMelody();
+    proceedBtn.focus();
 }
 
 function goNo() {
     alert("Nice try 😜 You can't say no!");
 }
+
+// proceed to actual yes page
+proceedBtn.addEventListener('click', ()=>{ window.location.href = 'yes.html'; });
+
+// make overlay responsive on resize
+window.addEventListener('resize', ()=>{ if (surpriseOverlay.classList.contains('show')) setupConfetti(); });
+
+/* ---------- NO BUTTON DODGE ---------- */
+const noBtn = document.querySelector('.no-btn');
+noBtn.style.position = 'relative';
+noBtn.addEventListener('mouseenter', ()=>{
+    // move random within small radius; stays on screen
+    const shiftX = (Math.random()*160) - 80; // -80..80
+    const shiftY = (Math.random()*80) - 40;
+    noBtn.style.transform = `translate(${shiftX}px, ${shiftY}px)`;
+});
+noBtn.addEventListener('click', ()=>{
+    // playful fallback
+    noBtn.style.transform = 'scale(0.9)';
+    setTimeout(()=> noBtn.style.transform = '', 220);
+});
 </script>
 
 </body>
