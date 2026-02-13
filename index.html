@@ -355,7 +355,6 @@ function goYes() {
     // show overlay, fire confetti, play music, then let user proceed
     surpriseOverlay.classList.add('show');
     fireConfetti(3800);
-    playMelody();
     proceedBtn.focus();
     spawnBokeh(20);
     spawnGlobalBokeh(28);
@@ -375,7 +374,6 @@ function revealSurprise() {
     content.style.display = 'block';
     setupConfetti();
     fireConfetti(4200);
-    playMelody();
     startTypewriter();
     spawnBokeh(18);
     spawnGlobalBokeh(22);
@@ -415,7 +413,7 @@ function showRevealButtons(){
 // replay and close handlers
 document.addEventListener('click', (e)=>{
     if(e.target && e.target.id === 'replayBtn'){
-        setupConfetti(); fireConfetti(3800); playMelody(); startTypewriter();
+        setupConfetti(); fireConfetti(3800); startTypewriter();
     }
     if(e.target && e.target.id === 'closeBtn'){
         // reset overlay
