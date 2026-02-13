@@ -178,10 +178,20 @@ canvas.confetti { position:absolute; inset:0; width:100%; height:100%; pointer-e
 <div id="surpriseOverlay">
     <div id="surpriseCard">
         <canvas class="confetti" id="confettiCanvas"></canvas>
-        <div style="z-index:2; text-align:center;">
+        <div id="surpriseIntro" style="z-index:2; text-align:center;">
             <h2 style="color:#c2185b; margin-bottom:6px">Surprise! 💖</h2>
             <p style="color:#ff4f9a;">I'm so happy you said yes — let's celebrate!</p>
             <button id="proceedBtn">Open your surprise</button>
+        </div>
+
+        <div id="surpriseContent" style="display:none; z-index:2; text-align:center;">
+            <h2 id="revealTitle" style="color:#c2185b; margin-bottom:6px">For you, my love</h2>
+            <div id="typewriter" style="font-size:18px;color:#c2185b; min-height:56px; margin-top:8px"></div>
+            <div id="surpriseGraphic" style="font-size:72px; margin-top:12px">💖</div>
+            <div style="margin-top:14px; display:flex; gap:12px; justify-content:center;">
+                <button id="replayBtn" style="padding:8px 14px; border-radius:18px; border:none; background:#ff7b9b; color:#fff; cursor:pointer">Play again</button>
+                <button id="closeBtn" style="padding:8px 14px; border-radius:18px; border:2px solid #ff4d6d; background:#fff; color:#ff4d6d; cursor:pointer">Close</button>
+            </div>
         </div>
     </div>
 </div>
@@ -312,7 +322,64 @@ function goNo() {
 }
 
 // proceed to actual yes page
-proceedBtn.addEventListener('click', ()=>{ window.location.href = 'yes.html'; });
+proceedBtn.addEventListener('click', revealSurprise);
+
+function revealSurprise() {
+    const intro = document.getElementById('surpriseIntro');
+    const content = document.getElementById('surpriseContent');
+    intro.style.display = 'none';
+    content.style.display = 'block';
+    setupConfetti();
+    fireConfetti(4200);
+    playMelody();
+    startTypewriter();
+}
+
+// Typewriter messages
+const _messages = [
+    "You're my sunshine on rainy days.",
+    "I love you more each day.",
+    "Happy Valentine's Day — forever yours. 💕"
+];
+let _mIndex = 0;
+function startTypewriter(){
+    _mIndex = 0;
+    document.getElementById('typewriter').textContent = '';
+    typeNextMessage();
+}
+function typeNextMessage(){
+    if(_mIndex >= _messages.length) return showRevealButtons();
+    const el = document.getElementById('typewriter');
+    const msg = _messages[_mIndex];
+    let i = 0;
+    el.textContent = '';
+    const t = setInterval(()=>{
+        el.textContent += msg.charAt(i);
+        i++;
+        if(i >= msg.length){ clearInterval(t); _mIndex++; setTimeout(typeNextMessage, 700); }
+    }, 40);
+}
+
+function showRevealButtons(){
+    // buttons already visible — nothing extra needed, kept for future expansion
+}
+
+// replay and close handlers
+document.addEventListener('click', (e)=>{
+    if(e.target && e.target.id === 'replayBtn'){
+        setupConfetti(); fireConfetti(3800); playMelody(); startTypewriter();
+    }
+    if(e.target && e.target.id === 'closeBtn'){
+        // reset overlay
+        const intro = document.getElementById('surpriseIntro');
+        const content = document.getElementById('surpriseContent');
+        content.style.display = 'none';
+        intro.style.display = 'block';
+        surpriseOverlay.classList.remove('show');
+        cancelAnimationFrame(confettiAnim);
+        confettiCtx && confettiCtx.clearRect(0,0,confettiCanvas.width, confettiCanvas.height);
+    }
+});
 
 // make overlay responsive on resize
 window.addEventListener('resize', ()=>{ if (surpriseOverlay.classList.contains('show')) setupConfetti(); });
