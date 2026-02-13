@@ -166,6 +166,13 @@ body {
 }
 
 canvas.confetti { position:absolute; inset:0; width:100%; height:100%; pointer-events:none }
+/* Stickers */
+.sticker-btns { display:flex; gap:8px; justify-content:center; margin-top:12px; flex-wrap:wrap }
+.sticker-btn { padding:8px 10px; border-radius:12px; background:rgba(255,255,255,0.9); border:1px solid #ffd6e0; cursor:pointer; font-size:20px }
+.sticker { position:absolute; font-size:40px; pointer-events:auto; transform-origin:center; animation:stickerPop 420ms ease-out; }
+@keyframes stickerPop { 0% { transform: scale(0.2) rotate(-10deg); opacity:0 } 60% { transform: scale(1.05) rotate(6deg); opacity:1 } 100% { transform: scale(1) rotate(0deg); opacity:1 } }
+.sticker.float { animation: floatAway 4200ms linear forwards; }
+@keyframes floatAway { 0% { transform: translateY(0) rotate(0deg); opacity:1 } 100% { transform: translateY(-260px) rotate(240deg); opacity:0 } }
 </style>
 </head>
 
@@ -191,6 +198,18 @@ canvas.confetti { position:absolute; inset:0; width:100%; height:100%; pointer-e
             <div style="margin-top:14px; display:flex; gap:12px; justify-content:center;">
                 <button id="replayBtn" style="padding:8px 14px; border-radius:18px; border:none; background:#ff7b9b; color:#fff; cursor:pointer">Play again</button>
                 <button id="closeBtn" style="padding:8px 14px; border-radius:18px; border:2px solid #ff4d6d; background:#fff; color:#ff4d6d; cursor:pointer">Close</button>
+            </div>
+
+            <div style="margin-top:10px;">
+                <div style="font-size:13px; color:#b93a63; margin-bottom:6px">Tap a sticker to sprinkle some cuteness</div>
+                <div class="sticker-btns" id="stickerTray">
+                    <button class="sticker-btn" data-emoji="🌹">🌹</button>
+                    <button class="sticker-btn" data-emoji="🐻">🐻</button>
+                    <button class="sticker-btn" data-emoji="🎈">🎈</button>
+                    <button class="sticker-btn" data-emoji="🍰">🍰</button>
+                    <button class="sticker-btn" data-emoji="✨">✨</button>
+                    <button class="sticker-btn" data-emoji="🥰">🥰</button>
+                </div>
             </div>
         </div>
     </div>
@@ -379,6 +398,34 @@ document.addEventListener('click', (e)=>{
         cancelAnimationFrame(confettiAnim);
         confettiCtx && confettiCtx.clearRect(0,0,confettiCanvas.width, confettiCanvas.height);
     }
+});
+
+// Stickers: spawn animated emoji stickers inside surpriseCard
+const stickerTray = document.getElementById('stickerTray');
+function createSticker(emoji, count=6){
+    const card = document.getElementById('surpriseCard');
+    for(let i=0;i<count;i++){
+        const s = document.createElement('div');
+        s.className = 'sticker';
+        s.textContent = emoji;
+        // random start within card
+        const pad = 30;
+        const rw = card.clientWidth - pad*2;
+        const rh = card.clientHeight - pad*2;
+        s.style.left = (pad + Math.random()*rw) + 'px';
+        s.style.top = (pad + Math.random()*rh) + 'px';
+        card.appendChild(s);
+        // schedule float away
+        requestAnimationFrame(()=> s.classList.add('float'));
+        // remove after animation
+        setTimeout(()=>{ s.remove(); }, 4600 + Math.random()*800);
+        // click to pop instantly
+        s.addEventListener('click', ()=>{ s.remove(); });
+    }
+}
+
+stickerTray && stickerTray.querySelectorAll('.sticker-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{ createSticker(btn.dataset.emoji, 6); });
 });
 
 // make overlay responsive on resize
