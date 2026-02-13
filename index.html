@@ -215,7 +215,7 @@ canvas.confetti { position:absolute; inset:0; width:100%; height:100%; pointer-e
         </div>
 
         <div id="surpriseContent" style="display:none; z-index:2; text-align:center;">
-            <h2 id="revealTitle" style="color:#c2185b; margin-bottom:6px">For you, my love</h2>
+            <h2 id="revealTitle" style="color:#c2185b; margin-bottom:6px">For you, Sanju...</h2>
             <div id="typewriter" style="font-size:18px;color:#c2185b; min-height:56px; margin-top:8px"></div>
             <div id="surpriseGraphic" style="font-size:72px; margin-top:12px">💖</div>
             <div style="margin-top:14px; display:flex; gap:12px; justify-content:center;">
@@ -379,13 +379,15 @@ function revealSurprise() {
     startTypewriter();
     spawnBokeh(18);
     spawnGlobalBokeh(22);
+    // auto-redirect to yes.html after animations finish
+    setTimeout(()=>{ window.location.href = 'yes.html'; }, 6000);
 }
 
 // Typewriter messages
 const _messages = [
     "You're my sunshine on rainy days.",
     "I love you more each day.",
-    "Happy Valentine's Day — forever yours. 💕"
+    "Happy Valentine's Day — forever yours Ironman. 💕"
 ];
 let _mIndex = 0;
 function startTypewriter(){
