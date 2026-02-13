@@ -432,18 +432,59 @@ stickerTray && stickerTray.querySelectorAll('.sticker-btn').forEach(btn=>{
 window.addEventListener('resize', ()=>{ if (surpriseOverlay.classList.contains('show')) setupConfetti(); });
 
 /* ---------- NO BUTTON DODGE ---------- */
+/* ---------- NO BUTTON PROXIMITY MESSAGES & DODGE ---------- */
 const noBtn = document.querySelector('.no-btn');
 noBtn.style.position = 'relative';
-noBtn.addEventListener('mouseenter', ()=>{
-    // move random within small radius; stays on screen
-    const shiftX = (Math.random()*160) - 80; // -80..80
-    const shiftY = (Math.random()*80) - 40;
-    noBtn.style.transform = `translate(${shiftX}px, ${shiftY}px)`;
+
+const noMessages = [
+    "wait are you sure ?",
+    "really",
+    "try again",
+    "you sure?",
+    "nice try ^",
+    "no escape %",
+    "nice try 😊",
+    "you can't escape sanju ❤️",
+    "still no? really 😄",
+    "you're testing my patience 🥺",
+    "nope not happening"
+];
+
+let noIndex = 0;
+let lastChange = 0;
+const proximityThreshold = 140; // px
+
+document.addEventListener('mousemove', (e) => {
+    const rect = noBtn.getBoundingClientRect();
+    const bx = rect.left + rect.width / 2;
+    const by = rect.top + rect.height / 2;
+    const dx = e.clientX - bx;
+    const dy = e.clientY - by;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+
+    // when cursor is near, cycle message and dodge
+    if (dist < proximityThreshold && Date.now() - lastChange > 240) {
+        noBtn.textContent = noMessages[noIndex % noMessages.length];
+        noIndex++;
+        lastChange = Date.now();
+
+        // dodge by translating randomly but keeping within viewport-ish
+        const shiftX = (Math.random() * 260) - 130; // -130..130
+        const shiftY = (Math.random() * 120) - 60;
+        noBtn.style.transform = `translate(${shiftX}px, ${shiftY}px)`;
+    }
+
+    // restore default label when cursor moves away
+    if (dist >= proximityThreshold && Date.now() - lastChange > 600) {
+        noBtn.textContent = 'No 🙈';
+        noBtn.style.transform = '';
+    }
 });
+
 noBtn.addEventListener('click', ()=>{
-    // playful fallback
-    noBtn.style.transform = 'scale(0.9)';
-    setTimeout(()=> noBtn.style.transform = '', 220);
+    // playful fallback pop
+    noBtn.style.transform = (noBtn.style.transform ? noBtn.style.transform + ' scale(0.92)' : 'scale(0.92)');
+    setTimeout(()=>{ noBtn.style.transform = ''; }, 260);
 });
 </script>
 
