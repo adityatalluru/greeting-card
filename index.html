@@ -462,8 +462,8 @@ document.addEventListener('mousemove', (e) => {
     const dy = e.clientY - by;
     const dist = Math.sqrt(dx*dx + dy*dy);
 
-    // when cursor is near, cycle message and dodge
-    if (dist < proximityThreshold && Date.now() - lastChange > 240) {
+    // when cursor is near, cycle message and dodge (1s debounce)
+    if (dist < proximityThreshold && Date.now() - lastChange > 1000) {
         noBtn.textContent = noMessages[noIndex % noMessages.length];
         noIndex++;
         lastChange = Date.now();
@@ -475,7 +475,7 @@ document.addEventListener('mousemove', (e) => {
     }
 
     // restore default label when cursor moves away
-    if (dist >= proximityThreshold && Date.now() - lastChange > 600) {
+    if (dist >= proximityThreshold && Date.now() - lastChange > 1000) {
         noBtn.textContent = 'No 🙈';
         noBtn.style.transform = '';
     }
